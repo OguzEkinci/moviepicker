@@ -3,6 +3,7 @@ import { SafeAreaView, Animated, Easing, Text, StyleSheet, Dimensions, Touchable
 import LottieView from 'lottie-react-native'
 import { MovieInfoModal, ErrorModal, Loader } from '../../components';
 import { getMovieDetail, getFilterMovieDetail } from '../../services/DiceServices/getMovieDetail'
+import { getGenres } from '../../actions/getGenres/genresFunc';
 const { width, height } = Dimensions.get("window")
 const Dice = ({ navigation }) => {
     const [loadingVisible, setLoadingVisible] = useState(false)
@@ -14,13 +15,12 @@ const Dice = ({ navigation }) => {
     const randomNumberNormal = Math.floor(Math.random() * 1000000) + 1
     const randomNumberFilter = Math.floor(Math.random() * 1000) + 1
     const randomNumberFilterMovie = Math.floor(Math.random() * 20) + 1
-
     const _getMovie = () => {
         setLoadingVisible(true)
-        if (!(startDate && endDate))
+        if (!(startDate || endDate))
             getMovieDetail(randomNumberNormal).then(res => {
                 setTimeout(() => {
-                    if (!res.data.adult) {
+                    if (!(res.data.adult)) {
                         setRandonMovie(res.data)
                         setModalVisible(true)
                         setLoadingVisible(false)
@@ -38,6 +38,7 @@ const Dice = ({ navigation }) => {
         else getFilterMovieDetail(randomNumberFilter, startDate, endDate).then(res => {
             setTimeout(() => {
                 setRandonMovie(res.data.results[randomNumberFilterMovie])
+                // getGenres(res?.data.results[randomNumberFilterMovie].genre_ids)
                 setModalVisible(true)
                 setLoadingVisible(false)
             }, 500)
@@ -55,11 +56,11 @@ const Dice = ({ navigation }) => {
             <View style={{ marginTop: 20, width: width, flexDirection: 'row', height: 100, justifyContent: 'space-evenly', alignItems: 'center' }}>
                 <View>
                     <Text style={{ color: '#484848', alignSelf: 'center' }}>Min. Year</Text>
-                    <TextInput onChangeText={setStartDate} keyboardType='number-pad' maxLength={4}  placeholder='Year' style={{padding: 8, width: 75, borderWidth: 3, borderRadius: 10, borderColor: "#191919", height: 35 }} />
+                    <TextInput onChangeText={setStartDate} keyboardType='number-pad' maxLength={4} placeholder='Year' style={{ padding: 8, width: 75, borderWidth: 3, borderRadius: 10, borderColor: "#191919", height: 35 }} />
                 </View>
                 <View>
                     <Text style={{ color: '#484848', alignSelf: 'center' }}>Max. Year</Text>
-                    <TextInput onChangeText={setEndDate} keyboardType='number-pad' maxLength={4} placeholder='Year' style={{padding: 8, width: 75, borderWidth: 3, borderRadius: 10, borderColor: "#191919", height: 35 }} />
+                    <TextInput onChangeText={setEndDate} keyboardType='number-pad' maxLength={4} placeholder='Year' style={{ padding: 8, width: 75, borderWidth: 3, borderRadius: 10, borderColor: "#191919", height: 35 }} />
                 </View>
             </View>
             <TouchableOpacity style={{ width: width, height: 400, justifyContent: 'center', alignItems: 'center', }} onPress={() => _getMovie()}>

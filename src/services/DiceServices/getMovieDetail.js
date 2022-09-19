@@ -22,8 +22,8 @@ export const getFilterMovieDetail = (id,startDate,endDate) => {
             with_watch_monetization_types: 'flatrate',
             include_adult: false,
             page: id,
-            "primary_release_date.gte":`${startDate}`,
-            "primary_release_date.lte":`${endDate}`
+            "primary_release_date.gte":startDate,
+            "primary_release_date.lte":endDate
         },
     })
 };
