@@ -1,10 +1,13 @@
+import { isEmptyArray } from "formik";
+import { isArray } from "lodash";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, TouchableOpacity, Text, Image, Dimensions, ScrollView } from "react-native";
 import Modal from 'react-native-modal'
+import { genresWithId } from "../../data/genresData";
 import { styles } from './MovieModal.style'
 const { width, height } = Dimensions.get("screen")
 const MovieInfoModal = props => {
-    const { modalVisible, setModalVisible, movieInfo } = props
+    const { modalVisible, setModalVisible, movieInfo, setMovieInfo } = props
     const timeConvert = (n) => {
         let num = n;
         let hours = (num / 60);
@@ -13,13 +16,14 @@ const MovieInfoModal = props => {
         let rminutes = Math.round(minutes);
         return rhours + " hour(s) and " + rminutes + " minute(s).";
     }
-
     return <View style={{ flex: 1, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }}>
-        <Modal propagateSwipe={true} animationIn={"tada"} isVisible={modalVisible} swipeDirection={"down"} onSwipeComplete={() => { setModalVisible(false) }}>
+        <Modal style={{margin: 0}} propagateSwipe={true} animationIn={"tada"} isVisible={modalVisible} swipeDirection={"down"} onSwipeComplete={() => { setModalVisible(false)}}>
             <View style={{ backgroundColor: '#fff', borderRadius: 10, flex: 0.9, padding: 12, justifyContent: 'flex-start', alignItems: 'center' }}>
                 <ScrollView style={{ flexGrow: 1, width: width }} contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}>
                     {movieInfo?.original_title ? <Text style={styles.mainTitle}>{movieInfo?.original_title}</Text> : <Text style={styles.mainTitle}>No Title</Text>}
+
                     {movieInfo?.title ? <Text style={styles.subTitle}>{movieInfo?.title}</Text> : <Text style={styles.subTitle}>No Title</Text>}
+
                     {movieInfo?.release_date ? <View style={styles.yearAndTimeHeaderInside}>
                         <Image style={styles.icon} resizeMode={'center'} source={require('../../assets/calendar.png')} />
                         <Text>{movieInfo?.release_date}</Text>
@@ -27,24 +31,27 @@ const MovieInfoModal = props => {
                         <Image style={styles.icon} resizeMode={'center'} source={require('../../assets/calendar.png')} />
                         <Text>-/-/-</Text>
                     </View>}
-                    {movieInfo?.poster_path ? <Image source={{ uri: `https://image.tmdb.org/t/p/w500` + movieInfo?.poster_path }} resizeMode={"contain"} style={{ width: width, height: 300 }} /> : <Image source={require('../../assets/gallery.png')} resizeMode={"contain"} style={{ width: width, height: 250 }} />}
 
-                    {movieInfo?.runtime ? <View style={styles.yearAndTimeHeaderInside}>
+                    {!movieInfo?.poster_path ? <Image source={require('../../assets/gallery.png')} resizeMode={"contain"} style={{ width: width-40, height: 300 }} /> : <Image source={{ uri: `https://image.tmdb.org/t/p/w500${movieInfo?.poster_path}`}} resizeMode={"contain"} style={{ width: width-40, height: 300 }} />}
+
+                    {/* {movieInfo?.runtime ? <View style={styles.yearAndTimeHeaderInside}>
                         <Image style={styles.icon} resizeMode={'center'} source={require('../../assets/sand-clock.png')} />
                         <Text>{timeConvert(movieInfo?.runtime)}</Text>
                     </View> : <View style={styles.yearAndTimeHeaderInside}>
                         <Image style={styles.icon} resizeMode={'center'} source={require('../../assets/sand-clock.png')} />
                         <Text>No runtime info</Text>
-                    </View>}
+                    </View>} */}
 
-                    <View style={{ flexDirection: 'row' }}>
+                    <View style={{marginTop: 10, flexDirection: 'row' }}>
                         <View>
                             <View style={styles.genresView}>
-                                {movieInfo?.genres && movieInfo?.genres.map((item, index) => {
-                                    return <View key={index} style={styles.genresInsideView}>
-                                        <Text>{item.name}</Text>
-                                    </View>
-                                })}
+                                {isArray(movieInfo?.genre_ids) && movieInfo?.genre_ids.map((genre_id,ind) => (
+                                    genresWithId.map((genres,index)=>(
+                                           genres?.id === genre_id &&  <View key={index} style={styles.genresInsideView}>
+                                            <Text >{genres?.name.toString()}</Text>
+                                           </View>
+                                    ))
+                                ))}
                             </View>
                             {movieInfo?.overview ? <Text style={styles.mainText}>{movieInfo.overview}</Text> : <Text style={styles.mainText}>No overview</Text>}
                         </View>
@@ -62,12 +69,12 @@ const MovieInfoModal = props => {
                             <Image source={require('../../assets/popularity.png')} resizeMode="center" style={styles.icon} />
                             <Text>{movieInfo?.popularity}</Text>
                         </View>}
-                        {movieInfo?.spoken_languages && movieInfo?.spoken_languages.map((item, index) => {
+                        {/* {movieInfo?.spoken_languages && movieInfo?.spoken_languages.map((item, index) => {
                             return <View key={index} style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
                                 <Image source={require('../../assets/language.png')} resizeMode="center" style={styles.icon} />
                                 <Text>{item.english_name}</Text>
                             </View>
-                        })}
+                        })} */}
                     </View>
                 </ScrollView>
             </View>
