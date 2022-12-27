@@ -810,6 +810,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@freakycoder/react-native-header-view@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@freakycoder/react-native-header-view/-/react-native-header-view-1.2.0.tgz#43cfeac7827d4fb25d0d07f7557524a313e00e4e"
+  integrity sha512-Ed+XskMIq0jMpS7EXSFpP971PmZfSpgXBi5PbFOAAJ8Vw8Zj6ktVJcU8vN2rrN+FuD/dn6uwQKuKKfXh+iZ2HQ==
+
 "@gorhom/portal@^1.0.14":
   version "1.0.14"
   resolved "https://registry.yarnpkg.com/@gorhom/portal/-/portal-1.0.14.tgz#1953edb76aaba80fb24021dc774550194a18e111"
@@ -1146,6 +1151,11 @@
   dependencies:
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
+
+"@react-native-community/blur@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/blur/-/blur-4.3.0.tgz#e5018b3b0bd6de9632ac6cf34e9f8e0f1a9a28ec"
+  integrity sha512-d6phh39kKcbZ4IluDftiVWqfeFOgjl1AbQWzN47x+hLKQ5GvQJ6QhRvgAuDZ+xbJksrbXgNpMjVYkjsbcVehxg==
 
 "@react-native-community/cli-debugger-ui@^7.0.3":
   version "7.0.3"
@@ -5754,6 +5764,11 @@ react-native-gradle-plugin@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/react-native-gradle-plugin/-/react-native-gradle-plugin-0.0.6.tgz#b61a9234ad2f61430937911003cddd7e15c72b45"
   integrity sha512-eIlgtsmDp1jLC24dRn43hB3kEcZVqx6DUQbR0N1ABXGnMEafm9I3V3dUUeD1vh+Dy5WqijSoEwLNUPLgu5zDMg==
+
+react-native-imaged-carousel-card@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-imaged-carousel-card/-/react-native-imaged-carousel-card-0.1.1.tgz#c9188edc9180168caf62e4fa7e4f7654c44d175e"
+  integrity sha512-EbPGQslisB2FJVW7TfEQnUda8QcCmB+dy1InQ63eiU1UYiuB1hWwc17pSkcmzitCeWksm9Fh/1G/7XYP+HFeVQ==
 
 react-native-linear-gradient@^2.6.2:
   version "2.6.2"

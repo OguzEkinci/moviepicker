@@ -10,7 +10,9 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@freakycoder/react-native-header-view": "^1.2.0",
     "@gorhom/portal": "^1.0.14",
+    "@react-native-community/blur": "^4.3.0",
     "@react-navigation/bottom-tabs": "^6.3.3",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
@@ -23,6 +25,7 @@
     "react": "17.0.2",
     "react-native": "0.68.1",
     "react-native-gesture-handler": "^2.7.1",
+    "react-native-imaged-carousel-card": "^0.1.1",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-localize": "^2.2.3",
     "react-native-modal": "^13.0.1",
