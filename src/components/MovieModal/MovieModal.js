@@ -7,7 +7,7 @@ import { genresWithId } from "../../data/genresData";
 import { styles } from './MovieModal.style'
 const { width, height } = Dimensions.get("screen")
 const MovieInfoModal = props => {
-    const { modalVisible, setModalVisible, movieInfo, setMovieInfo } = props
+    const { modalVisible, setModalVisible, movieInfo } = props
     const timeConvert = (n) => {
         let num = n;
         let hours = (num / 60);
