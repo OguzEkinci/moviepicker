@@ -21,6 +21,7 @@ import { genres, genresWithId } from '../../data/genresData'
 import { isEmpty } from 'lodash'
 import LinearGradient from 'react-native-linear-gradient'
 import { language, languageWithInfo } from '../../data/language'
+import { BlurView } from '@react-native-community/blur'
 const { width, height } = Dimensions.get('window')
 const Dice = ({ navigation }) => {
   const [loadingVisible, setLoadingVisible] = useState(false)
@@ -52,6 +53,9 @@ const Dice = ({ navigation }) => {
       } else {
         _getMovie()
       }
+    }).catch(err=>{
+      setErrorModalVisible(true)
+      setLoadingVisible(false)
     })
   }
 
@@ -78,7 +82,7 @@ const Dice = ({ navigation }) => {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
+      {/* <LinearGradient
         style={{
           flex: 1,
           justifyContent: 'center',
@@ -226,7 +230,168 @@ const Dice = ({ navigation }) => {
           errorModalVisible={errorModalVisible}
           setErrorModalVisible={setErrorModalVisible}
         />
-      </LinearGradient>
+      </LinearGradient> */}
+      
+      <Image style={{position: "absolute",
+      width: width, height: height,
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0}} resizeMode={'stretch'} source={require('../../assets/background.png')} />
+          <BlurView
+          style={{position: "absolute",
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0}}
+          blurType="chromeMaterialDark"
+          blurAmount={1}
+        />
+        <SelectDropdown
+        ref={categoryRef}
+        defaultValue={category}
+          search
+          searchPlaceHolder={'Search Category'}
+          searchPlaceHolderColor={'#ddd'}
+          data={genres}
+          defaultButtonText={'Select Category'}
+          buttonTextStyle={{color: '#ddd'}}
+          onSelect={(selectedItem, index) => {
+            _setCategoryId(selectedItem)
+          }}
+          buttonStyle={{
+            backgroundColor: 'transparent',
+            borderWidth: 3,
+            borderRadius: 10,
+            borderColor: '#ddd'
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            // text represented after item is selected
+            // if data array is an array of objects then return selectedItem.property to render after item is selected
+            return selectedItem
+          }}
+          rowTextForSelection={(item, index) => {
+            // text represented for each item in dropdown
+            // if data array is an array of objects then return item.property to represent item in dropdown
+            return item
+          }}
+        />
+        <SelectDropdown
+        ref={lngRef}
+        defaultValue={lng}
+          search
+          searchPlaceHolder={'Search Language'}
+          searchPlaceHolderColor={'#ddd'}
+          data={language}
+          defaultButtonText={'Select Language'}
+          buttonTextStyle={{color: '#ddd'}}
+          onSelect={(selectedItem, index) => {
+            _setLanguage(selectedItem)
+          }}
+          buttonStyle={{
+            marginTop: 20,
+            backgroundColor: 'transparent',
+            borderWidth: 3,
+            borderRadius: 10,
+            borderColor: '#ddd'
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            // text represented after item is selected
+            // if data array is an array of objects then return selectedItem.property to render after item is selected
+            return selectedItem
+          }}
+          rowTextForSelection={(item, index) => {
+            // text represented for each item in dropdown
+            // if data array is an array of objects then return item.property to represent item in dropdown
+            return item
+          }}
+        />
+        <View
+          style={{
+            marginTop: 20,
+            width: width,
+            flexDirection: 'row',
+            height: 100,
+            justifyContent: 'space-evenly',
+            alignItems: 'center'
+          }}
+        >
+          <View>
+            <Text style={{ color: '#ddd', alignSelf: 'center' }}>
+              Min. Year
+            </Text>
+            <TextInput
+              value={startDate}
+              onChangeText={setStartDate}
+              keyboardType='number-pad'
+              maxLength={4}
+              placeholder='Year'
+              placeholderTextColor={'#ddd'}
+              color={'#ddd'}
+              style={{
+                padding: 8,
+                width: 75,
+                borderWidth: 3,
+                borderRadius: 10,
+                borderColor: '#ddd',
+                height: 35
+              }}
+            />
+          </View>
+          <View>
+            <Text style={{ color: '#ddd', alignSelf: 'center' }}>
+              Max. Year
+            </Text>
+            <TextInput
+              value={endDate}
+              onChangeText={setEndDate}
+              keyboardType='number-pad'
+              maxLength={4}
+              placeholder='Year'
+              placeholderTextColor={'#ddd'}
+              color={'#ddd'}
+              style={{
+                padding: 8,
+                width: 75,
+                borderWidth: 3,
+                borderRadius: 10,
+                borderColor: '#ddd',
+                height: 35
+              }}
+            />
+          </View>
+        </View>
+        <TouchableOpacity onPress={()=>_clearFilter()}>
+          <Image source={require('../../assets/filter.png')} style={{tintColor: '#ddd', width: 50, height: 50}} resizeMode={'contain'} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            width: width,
+            height: 300,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          onPress={() => _getMovie()}
+        >
+          <LottieView
+            style={{ height: 200 }}
+            source={require('../../animations/5884-video-movie.json')}
+            autoPlay
+            loop
+          />
+        </TouchableOpacity>
+        {loadingVisible && <Loader />}
+
+        <MovieInfoModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          movieInfo={randomMovie}
+          setMovieInfo={setRandomMovie}
+        />
+        <ErrorModal
+          errorModalVisible={errorModalVisible}
+          setErrorModalVisible={setErrorModalVisible}
+        />
     </SafeAreaView>
   )
 }
@@ -235,6 +400,7 @@ export { Dice }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 50,
     justifyContent: 'space-between',
     alignItems: 'center'
   }
