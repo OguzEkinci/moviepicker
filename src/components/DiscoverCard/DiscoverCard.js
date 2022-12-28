@@ -16,7 +16,7 @@ const DiscoverCard = ({item}) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <View style={styles.discoverCard}>
+    <View>
       <TouchableWithoutFeedback
         onPress={() => {
           setModalVisible(true);
@@ -28,17 +28,18 @@ const DiscoverCard = ({item}) => {
             alignItems: 'center',
           }}>
           <ImagedCarouselCard
+            borderRadius={75}
             text={item?.title}
             textStyle={{
               color: '#ddd',
               fontSize: 16,
               fontWeight: 'bold',
               textAlign: 'center',
+              overflow: 'hidden',
             }}
             overlayBackgroundColor="#051934"
             style={styles.discoverCard}
             width={width / 3}
-            height={100}
             shadowColor="#051934"
             source={{
               uri: `https://image.tmdb.org/t/p/w500/${item?.poster_path}`,
