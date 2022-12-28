@@ -79,9 +79,11 @@ const Discover = ({navigation}) => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          paddingBottom: height * 0.14,
         }}
-        colors={['#ddd', '#ddd', '#333']}>
+        start={{x: 0.0, y: 0.25}}
+        end={{x: 0.5, y: 1.0}}
+        locations={[0, 0.5, 0.6]}
+        colors={['#4c669f', '#3b5998', '#192f6a']}>
         <ScrollView>
           <ScrollView>
             <View style={styles.headerView}>
@@ -121,7 +123,7 @@ const Discover = ({navigation}) => {
               estimatedItemSize={400}
             />
           </ScrollView>
-          <View style={{height: 20}} />
+          <View style={{height: height * 0.14}} />
         </ScrollView>
         {loadingVisible && <Loader />}
       </LinearGradient>
