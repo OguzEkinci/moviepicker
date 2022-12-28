@@ -1,39 +1,36 @@
-import React, { Children, useState } from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { Fav } from './pages/Fav/index'
-import { Dice } from './pages/Dice/index'
-import { Discover } from './pages/Discover/index'
-import { View, StyleSheet, Text, Image, TouchableOpacity } from 'react-native'
-import { PortalProvider } from '@gorhom/portal'
-const Stack = createNativeStackNavigator()
-const Tab = createBottomTabNavigator()
+import React, {Children, useState} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Fav} from './pages/Fav/index';
+import {Dice} from './pages/Dice/index';
+import {Discover} from './pages/Discover/index';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {PortalProvider} from '@gorhom/portal';
+const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-const CustomTabBarButton = ({ children, onPress }) => {
+const CustomTabBarButton = ({children, onPress}) => {
   return (
     <TouchableOpacity
       style={{
         justifyContent: 'center',
         alignItems: 'center',
         top: -23,
-        ...styles.shadow
+        ...styles.shadow,
       }}
-      onPress={onPress}
-    >
-      <View style={{ width: 75, height: 75 }}>
-        {children}
-      </View>
+      onPress={onPress}>
+      <View style={{width: 75, height: 75}}>{children}</View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-export default function App () {
+export default function App() {
   return (
     <PortalProvider>
       <NavigationContainer>
         <Tab.Navigator
-          initialRouteName='Dice'
+          initialRouteName="Dice"
           screenOptions={{
             tabBarShowLabel: false,
             tabBarStyle: {
@@ -45,124 +42,117 @@ export default function App () {
               backgroundColor: '#ddd',
               borderRadius: 15,
               height: 70,
-              ...styles.shadow
-            }
-          }}
-        >
+              ...styles.shadow,
+            },
+          }}>
           <Tab.Screen
-            name='Discover'
+            name="Discover"
             component={Discover}
             options={{
-              tabBarIcon: ({ focused }) => {
-                return focused
-                  ? <View
-                    style={{ alignItems: 'center', justifyContent: 'center' }}
-                    >
+              tabBarIcon: ({focused}) => {
+                return focused ? (
+                  <View
+                    style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
-                      resizeMode='contain'
-                      style={{ width: 30, height: 30, bottom: 2 }}
+                      resizeMode="contain"
+                      style={{width: 30, height: 30, bottom: 2}}
                       source={require('./assets/compass-active.png')}
-                      />
-                    <Text style={{ color: 'black', fontSize: 12 }}>
-                        Discover
-                      </Text>
+                    />
+                    <Text style={{color: 'black', fontSize: 12}}>Discover</Text>
                   </View>
-                  : <View
-                    style={{ alignItems: 'center', justifyContent: 'center' }}
-                    >
+                ) : (
+                  <View
+                    style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
-                      resizeMode='contain'
-                      style={{ width: 30, height: 30, bottom: 2 }}
+                      resizeMode="contain"
+                      style={{width: 30, height: 30, bottom: 2}}
                       source={require('./assets/compass.png')}
-                      />
-                    <Text style={{ color: 'gray', fontSize: 12 }}>
-                        Discover
-                      </Text>
+                    />
+                    <Text style={{color: 'gray', fontSize: 12}}>Discover</Text>
                   </View>
+                );
               },
-              headerShown: false
+              headerShown: false,
             }}
           />
           <Tab.Screen
-            name='Dice'
+            name="Dice"
             component={Dice}
             options={{
-              tabBarIcon: ({ focused }) => {
-                return focused
-                  ? <View
-                    style={{ alignItems: 'center', justifyContent: 'center' }}
-                    >
+              tabBarIcon: ({focused}) => {
+                return focused ? (
+                  <View
+                    style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
-                      resizeMode='contain'
-                      style={{ width: 75, height: 75, bottom: 2 }}
+                      resizeMode="contain"
+                      style={{width: 75, height: 75, bottom: 2}}
                       source={require('./assets/clapperboard-active.png')}
-                      />
+                    />
                   </View>
-                  : <View
-                    style={{ alignItems: 'center', justifyContent: 'center' }}
-                    >
+                ) : (
+                  <View
+                    style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
-                      resizeMode='contain'
-                      style={{ width: 75, height: 75, bottom: 2 }}
+                      resizeMode="contain"
+                      style={{width: 75, height: 75, bottom: 2}}
                       source={require('./assets/clapperboard.png')}
-                      />
+                    />
                   </View>
+                );
               },
               tabBarButton: props => {
-                return <CustomTabBarButton {...props} />
+                return <CustomTabBarButton {...props} />;
               },
-              headerShown: false
+              headerShown: false,
             }}
           />
           <Tab.Screen
-            name='Fav'
+            name="Fav"
             component={Fav}
             options={{
-              tabBarIcon: ({ focused }) => {
-                return focused
-                  ? <View
-                    style={{ alignItems: 'center', justifyContent: 'center' }}
-                    >
+              tabBarIcon: ({focused}) => {
+                return focused ? (
+                  <View
+                    style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
-                      resizeMode='contain'
-                      style={{ width: 40, height: 40, bottom: 2 }}
+                      resizeMode="contain"
+                      style={{width: 40, height: 40, bottom: 2}}
                       source={require('./assets/favourite-active.png')}
-                      />
-                    <Text style={{ color: 'black', fontSize: 12 }}>
-                        Saved
-                      </Text>
+                    />
+                    <Text style={{color: 'black', fontSize: 12}}>Saved</Text>
                   </View>
-                  : <View
-                    style={{ alignItems: 'center', justifyContent: 'center' }}
-                    >
+                ) : (
+                  <View
+                    style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
-                      resizeMode='contain'
-                      style={{ width: 40, height: 40, bottom: 2 }}
+                      resizeMode="contain"
+                      style={{width: 40, height: 40, bottom: 2}}
                       source={require('./assets/favourite.png')}
-                      />
-                    <Text style={{ color: 'gray', fontSize: 12 }}>Saved</Text>
+                    />
+                    <Text style={{color: 'gray', fontSize: 12}}>Saved</Text>
                   </View>
+                );
               },
-              headerShown: false
+              headerShown: false,
             }}
           />
         </Tab.Navigator>
       </NavigationContainer>
     </PortalProvider>
-  )
+  );
 }
 
-export { App }
+export {App};
 
 const styles = StyleSheet.create({
   shadow: {
     shadowColor: '#7F5DF0',
     shadowOffset: {
       width: 0,
-      height: 10
+      height: 10,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
-    elevation: 5
-  }
-})
+    elevation: 5,
+  },
+});
