@@ -39,7 +39,7 @@ export default function App() {
               left: 20,
               right: 20,
               elevation: 0,
-              backgroundColor: '#ddd',
+              backgroundColor: '#4c669f',
               borderRadius: 15,
               height: 70,
               ...styles.shadow,
@@ -55,20 +55,30 @@ export default function App() {
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
                       resizeMode="contain"
-                      style={{width: 30, height: 30, bottom: 2}}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        bottom: 2,
+                        tintColor: '#ddd',
+                      }}
                       source={require('./assets/compass-active.png')}
                     />
-                    <Text style={{color: 'black', fontSize: 12}}>Discover</Text>
+                    <Text style={{color: '#ddd', fontSize: 12}}>Discover</Text>
                   </View>
                 ) : (
                   <View
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
                       resizeMode="contain"
-                      style={{width: 30, height: 30, bottom: 2}}
+                      style={{
+                        width: 30,
+                        height: 30,
+                        bottom: 2,
+                        tintColor: '#ddd',
+                      }}
                       source={require('./assets/compass.png')}
                     />
-                    <Text style={{color: 'gray', fontSize: 12}}>Discover</Text>
+                    <Text style={{color: '#ddd', fontSize: 12}}>Discover</Text>
                   </View>
                 );
               },
@@ -85,7 +95,12 @@ export default function App() {
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
                       resizeMode="contain"
-                      style={{width: 75, height: 75, bottom: 2}}
+                      style={{
+                        width: 75,
+                        height: 75,
+                        bottom: 2,
+                        tintColor: '#ddd',
+                      }}
                       source={require('./assets/clapperboard-active.png')}
                     />
                   </View>
@@ -94,7 +109,12 @@ export default function App() {
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
                       resizeMode="contain"
-                      style={{width: 75, height: 75, bottom: 2}}
+                      style={{
+                        width: 75,
+                        height: 75,
+                        bottom: 2,
+                        tintColor: '#ddd',
+                      }}
                       source={require('./assets/clapperboard.png')}
                     />
                   </View>
@@ -116,20 +136,30 @@ export default function App() {
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
                       resizeMode="contain"
-                      style={{width: 40, height: 40, bottom: 2}}
+                      style={{
+                        width: 40,
+                        height: 40,
+                        bottom: 2,
+                        tintColor: '#ddd',
+                      }}
                       source={require('./assets/favourite-active.png')}
                     />
-                    <Text style={{color: 'black', fontSize: 12}}>Saved</Text>
+                    <Text style={{color: '#ddd', fontSize: 12}}>Saved</Text>
                   </View>
                 ) : (
                   <View
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
                       resizeMode="contain"
-                      style={{width: 40, height: 40, bottom: 2}}
+                      style={{
+                        width: 40,
+                        height: 40,
+                        bottom: 2,
+                        tintColor: '#ddd',
+                      }}
                       source={require('./assets/favourite.png')}
                     />
-                    <Text style={{color: 'gray', fontSize: 12}}>Saved</Text>
+                    <Text style={{color: '#ddd', fontSize: 12}}>Saved</Text>
                   </View>
                 );
               },
