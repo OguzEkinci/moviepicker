@@ -1,37 +1,26 @@
-import { Dimensions, StyleSheet } from 'react-native'
-const { width, height } = Dimensions.get('screen')
+import {Dimensions, StyleSheet} from 'react-native';
+const {width, height} = Dimensions.get('screen');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
     backgroundGradient: 'vertical',
     backgroundGradientTop: '#333333',
-    backgroundGradientBottom: '#666666'
+    backgroundGradientBottom: '#666666',
   },
-  senario: {
-    flex: 1,
-    width: width,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  diceButton: {
-    flex: 0.5,
-    flexDirection: 'column',
-    width: width,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  favButton: {
-    flex: 0.5,
-    flexDirection: 'column',
-    width: width,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonText: {
-    color: '#f2f2f2',
+  headerText: {
+    fontWeight: 'bold',
     fontSize: 20,
-    fontWeight: 'bold'
-  }
-})
-export { styles }
+    color: 'black',
+  },
+  headerView: {
+    paddingTop: 30,
+    paddingBottom: 4,
+    paddingLeft: 10,
+    borderRadius: 30,
+    marginLeft: 3,
+    marginRight: 3,
+    flexDirection: 'row',
+  },
+});
+export {styles};
