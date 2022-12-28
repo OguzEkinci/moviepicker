@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   Animated,
@@ -10,56 +10,68 @@ import {
   View,
   Image,
   ScrollView,
-  FlatList
-} from 'react-native'
-import LottieView from 'lottie-react-native'
-import ImagedCarouselCard from 'react-native-imaged-carousel-card'
-import { FlashList } from '@shopify/flash-list'
-import { styles } from './Discover.style'
-import LinearGradient from 'react-native-linear-gradient'
-import { DiscoverCard } from '../../components/DiscoverCard/DiscoverCard'
-import { Loader, MovieInfoModal } from '../../components'
-import { Portal, PortalHost } from '@gorhom/portal'
-import { getPopular } from '../../services/DiscoverServices/getPopular'
-const { width, height } = Dimensions.get('window')
+  FlatList,
+} from 'react-native';
+import LottieView from 'lottie-react-native';
+import ImagedCarouselCard from 'react-native-imaged-carousel-card';
+import {FlashList} from '@shopify/flash-list';
+import {styles} from './Discover.style';
+import LinearGradient from 'react-native-linear-gradient';
+import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
+import {Loader, MovieInfoModal} from '../../components';
+import {Portal, PortalHost} from '@gorhom/portal';
+import {getPopular} from '../../services/DiscoverServices/getPopular';
+import {getTopRated} from '../../services/DiscoverServices/getTopRated';
+import {getTrending} from '../../services/DiscoverServices/getTrending';
+import ToggleButton from './components/ToggleButton/ToggleButton';
+const {width, height} = Dimensions.get('window');
 
-const Discover = ({ navigation }) => {
-  const [popularList, setPopularList] = useState([])
-  const [loadingVisible, setLoadingVisible] = useState(false)
-
-  const DATA = [
-    {
-      title: 'First Item'
-    },
-    {
-      title: 'First Item'
-    },
-    {
-      title: 'First Item'
-    },
-    {
-      title: 'First Item'
-    },
-    {
-      title: 'Second Item'
-    }
-  ]
-
+const Discover = ({navigation}) => {
+  const [popularList, setPopularList] = useState([]);
+  const [topRatedList, setTopRatedList] = useState([]);
+  const [trendingList, setTrendingList] = useState([]);
+  const [loadingVisible, setLoadingVisible] = useState(false);
+  const [timeRange, setTimeRange] = useState('day');
   useEffect(() => {
-    setLoadingVisible(true)
+    setLoadingVisible(true);
     getPopular()
       .then(res => {
-        setLoadingVisible(false)
-        setPopularList(res.data.results)
+        setLoadingVisible(false);
+        setPopularList(res.data.results);
       })
       .catch(err => {
-        setLoadingVisible(false)
+        setLoadingVisible(false);
+      });
+    getTopRated()
+      .then(res => {
+        setTopRatedList(res.data.results);
       })
-  }, [])
+      .catch(err => {
+        setLoadingVisible(false);
+      });
+    getTrending(timeRange)
+      .then(res => {
+        setTrendingList(res.data.results);
+      })
+      .catch(err => {
+        setLoadingVisible(false);
+      });
+  }, []);
 
-  const renderGetPopular = ({ item }) => {
-    return <DiscoverCard item={item} />
-  }
+  const renderListCard = ({item}) => {
+    return <DiscoverCard item={item} />;
+  };
+
+  const handleToggle = () => {
+    getTrending(timeRange)
+      .then(res => {
+        setTrendingList(res.data.results);
+      })
+      .catch(err => {
+        setLoadingVisible(false);
+      });
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -67,22 +79,53 @@ const Discover = ({ navigation }) => {
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          paddingBottom: height * 0.14
+          paddingBottom: height * 0.14,
         }}
-        colors={['#ddd', '#ddd', '#333']}
-      >
+        colors={['#ddd', '#ddd', '#333']}>
         <ScrollView>
-          <Text>POPULAR</Text>
-          <FlatList
-            data={popularList}
-            horizontal
-            renderItem={renderGetPopular}
-            estimatedItemSize={400}
-          />
+          <ScrollView>
+            <View style={styles.headerView}>
+              <Text style={styles.headerText}>TRENDING</Text>
+              <ToggleButton
+                onPress={handleToggle}
+                timeRange={timeRange}
+                setTimeRange={setTimeRange}
+              />
+            </View>
+            <FlatList
+              data={trendingList}
+              horizontal
+              renderItem={renderListCard}
+              estimatedItemSize={400}
+            />
+          </ScrollView>
+          <ScrollView>
+            <View style={styles.headerView}>
+              <Text style={styles.headerText}>POPULAR</Text>
+            </View>
+            <FlatList
+              data={popularList}
+              horizontal
+              renderItem={renderListCard}
+              estimatedItemSize={400}
+            />
+          </ScrollView>
+          <ScrollView>
+            <View style={styles.headerView}>
+              <Text style={styles.headerText}>TOP RATED</Text>
+            </View>
+            <FlatList
+              data={topRatedList}
+              horizontal
+              renderItem={renderListCard}
+              estimatedItemSize={400}
+            />
+          </ScrollView>
+          <View style={{height: 20}} />
         </ScrollView>
         {loadingVisible && <Loader />}
       </LinearGradient>
     </SafeAreaView>
-  )
-}
-export { Discover }
+  );
+};
+export {Discover};
