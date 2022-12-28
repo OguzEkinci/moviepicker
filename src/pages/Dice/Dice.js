@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, {useEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   Animated,
@@ -11,141 +11,135 @@ import {
   Image,
   Alert,
   TextInput,
-  ImageBackground
-} from 'react-native'
-import LottieView from 'lottie-react-native'
-import { MovieInfoModal, ErrorModal, Loader } from '../../components'
-import { getFilterMovieDetail } from '../../services/DiceServices/getMovieDetail'
-import SelectDropdown from 'react-native-select-dropdown'
-import { genres, genresWithId } from '../../data/genresData'
-import { isEmpty } from 'lodash'
-import LinearGradient from 'react-native-linear-gradient'
-import { language, languageWithInfo } from '../../data/language'
-import { BlurView } from '@react-native-community/blur'
-const { width, height } = Dimensions.get('window')
-const Dice = ({ navigation }) => {
-  const [loadingVisible, setLoadingVisible] = useState(false)
-  const [randomMovie, setRandomMovie] = useState([])
-  const [modalVisible, setModalVisible] = useState(false)
-  const [errorModalVisible, setErrorModalVisible] = useState(false)
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
-  const [category, setCategory] = useState('')
-  const [lng, setLanguage] = useState('')
-  const lngRef = useRef(null)
-  const categoryRef = useRef(null)
+  ImageBackground,
+} from 'react-native';
+import LottieView from 'lottie-react-native';
+import {MovieInfoModal, ErrorModal, Loader} from '../../components';
+import {getFilterMovieDetail} from '../../services/DiceServices/getMovieDetail';
+import SelectDropdown from 'react-native-select-dropdown';
+import {genres, genresWithId} from '../../data/genresData';
+import {isEmpty} from 'lodash';
+import {language, languageWithInfo} from '../../data/language';
+import {styles} from './Dice.style';
+const {width, height} = Dimensions.get('window');
+const Dice = ({navigation}) => {
+  const [loadingVisible, setLoadingVisible] = useState(false);
+  const [randomMovie, setRandomMovie] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [category, setCategory] = useState('');
+  const [lng, setLanguage] = useState('');
+  const lngRef = useRef(null);
+  const categoryRef = useRef(null);
   const _getMovie = async () => {
-    setLoadingVisible(true)
-    const randomNumberFilter = Math.floor(Math.random() * 500) + 1
+    setLoadingVisible(true);
+    const randomNumberFilter = Math.floor(Math.random() * 500) + 1;
     await getFilterMovieDetail(
       randomNumberFilter,
       startDate,
       endDate,
       category,
-      lng
-    ).then(res => {
-      const randomNumberFilterMovie =
-        Math.floor(Math.random() * res.data.results.length) + 1
-      if (!isEmpty(res.data.results) && !isEmpty(res.data?.results[randomNumberFilterMovie]?.poster_path)) {
-        setRandomMovie(res.data.results[randomNumberFilterMovie])
-        setModalVisible(true)
-        setLoadingVisible(false)
-      } else {
-        _getMovie()
-      }
-    }).catch(err=>{
-      setErrorModalVisible(true)
-      setLoadingVisible(false)
-    })
-  }
+      lng,
+    )
+      .then(res => {
+        const randomNumberFilterMovie =
+          Math.floor(Math.random() * res.data.results.length) + 1;
+        if (
+          !isEmpty(res.data.results) &&
+          !isEmpty(res.data?.results[randomNumberFilterMovie]?.poster_path)
+        ) {
+          setRandomMovie(res.data.results[randomNumberFilterMovie]);
+          setModalVisible(true);
+          setLoadingVisible(false);
+        } else {
+          _getMovie();
+        }
+      })
+      .catch(err => {
+        setErrorModalVisible(true);
+        setLoadingVisible(false);
+      });
+  };
 
   const _setCategoryId = categoryName => {
     // bu fonksiyon kategori idsini alıp servise yollanacak kategori parametresini atamak için
     genresWithId.forEach(item => {
-      item.name === categoryName && setCategory(item.id)
-    })
-  }
+      item.name === categoryName && setCategory(item.id);
+    });
+  };
 
   const _setLanguage = language => {
     languageWithInfo.forEach(item => {
-      item.english_name === language && setLanguage(item.iso_639_1)
-    })
-  }
+      item.english_name === language && setLanguage(item.iso_639_1);
+    });
+  };
 
   const _clearFilter = () => {
-    setStartDate('')
-    setEndDate('')
-    setCategory('')
-    setLanguage('')
-    lngRef.current?.reset()
-    categoryRef.current?.reset()
-  }
+    setStartDate('');
+    setEndDate('');
+    setCategory('');
+    setLanguage('');
+    lngRef.current?.reset();
+    categoryRef.current?.reset();
+  };
   return (
     <SafeAreaView style={styles.container}>
-      {/* <LinearGradient
+      <ImageBackground
         style={{
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
-          paddingTop: 50
+          paddingTop: 50,
         }}
-        colors={['#ddd', '#ddd', '#333']}
-      >
+        source={require('../../assets/background.png')}>
         <SelectDropdown
-        ref={categoryRef}
-        defaultValue={category}
+          ref={categoryRef}
+          defaultValue={category}
           search
           searchPlaceHolder={'Search Category'}
-          searchPlaceHolderColor={'darkgrey'}
+          searchPlaceHolderColor={'black'}
           data={genres}
           defaultButtonText={'Select Category'}
+          buttonTextStyle={{color: '#ddd', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
-            _setCategoryId(selectedItem)
+            _setCategoryId(selectedItem);
           }}
-          buttonStyle={{
-            backgroundColor: 'transparent',
-            borderWidth: 3,
-            borderRadius: 10,
-            borderColor: '#191919'
-          }}
+          buttonStyle={styles.topDropdown}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
             // if data array is an array of objects then return selectedItem.property to render after item is selected
-            return selectedItem
+            return selectedItem;
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
             // if data array is an array of objects then return item.property to represent item in dropdown
-            return item
+            return item;
           }}
         />
         <SelectDropdown
-        ref={lngRef}
-        defaultValue={lng}
+          ref={lngRef}
+          defaultValue={lng}
           search
           searchPlaceHolder={'Search Language'}
           searchPlaceHolderColor={'darkgrey'}
           data={language}
           defaultButtonText={'Select Language'}
+          buttonTextStyle={{color: '#ddd', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
-            _setLanguage(selectedItem)
+            _setLanguage(selectedItem);
           }}
-          buttonStyle={{
-            marginTop: 20,
-            backgroundColor: 'transparent',
-            borderWidth: 3,
-            borderRadius: 10,
-            borderColor: '#191919'
-          }}
+          buttonStyle={styles.bottomDropdown}
           buttonTextAfterSelection={(selectedItem, index) => {
             // text represented after item is selected
             // if data array is an array of objects then return selectedItem.property to render after item is selected
-            return selectedItem
+            return selectedItem;
           }}
           rowTextForSelection={(item, index) => {
             // text represented for each item in dropdown
             // if data array is an array of objects then return item.property to represent item in dropdown
-            return item
+            return item;
           }}
         />
         <View
@@ -155,233 +149,75 @@ const Dice = ({ navigation }) => {
             flexDirection: 'row',
             height: 100,
             justifyContent: 'space-evenly',
-            alignItems: 'center'
-          }}
-        >
+            alignItems: 'center',
+          }}>
           <View>
-            <Text style={{ color: '#484848', alignSelf: 'center' }}>
-              Min. Year
-            </Text>
-            <TextInput
-            value={startDate}
-              onChangeText={setStartDate}
-              keyboardType='number-pad'
-              maxLength={4}
-              placeholder='Year'
+            <Text
               style={{
-                padding: 8,
-                width: 75,
-                borderWidth: 3,
-                borderRadius: 10,
-                borderColor: '#191919',
-                height: 35
-              }}
-            />
-          </View>
-          <View>
-            <Text style={{ color: '#484848', alignSelf: 'center' }}>
-              Max. Year
-            </Text>
-            <TextInput
-              value={endDate}
-              onChangeText={setEndDate}
-              keyboardType='number-pad'
-              maxLength={4}
-              placeholder='Year'
-              style={{
-                padding: 8,
-                width: 75,
-                borderWidth: 3,
-                borderRadius: 10,
-                borderColor: '#191919',
-                height: 35
-              }}
-            />
-          </View>
-        </View>
-        <TouchableOpacity onPress={()=>_clearFilter()}>
-          <Image source={require('../../assets/filter.png')} style={{width: 50, height: 50}} resizeMode={'contain'} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            width: width,
-            height: 300,
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-          onPress={() => _getMovie()}
-        >
-          <LottieView
-            style={{ height: 200 }}
-            source={require('../../animations/5884-video-movie.json')}
-            autoPlay
-            loop
-          />
-        </TouchableOpacity>
-        {loadingVisible && <Loader />}
-
-        <MovieInfoModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-          movieInfo={randomMovie}
-          setMovieInfo={setRandomMovie}
-        />
-        <ErrorModal
-          errorModalVisible={errorModalVisible}
-          setErrorModalVisible={setErrorModalVisible}
-        />
-      </LinearGradient> */}
-      
-      <Image style={{position: "absolute",
-      width: width, height: height,
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0}} resizeMode={'stretch'} source={require('../../assets/background.png')} />
-          <BlurView
-          style={{position: "absolute",
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0}}
-          blurType="chromeMaterialDark"
-          blurAmount={1}
-        />
-        <SelectDropdown
-        ref={categoryRef}
-        defaultValue={category}
-          search
-          searchPlaceHolder={'Search Category'}
-          searchPlaceHolderColor={'#ddd'}
-          data={genres}
-          defaultButtonText={'Select Category'}
-          buttonTextStyle={{color: '#ddd'}}
-          onSelect={(selectedItem, index) => {
-            _setCategoryId(selectedItem)
-          }}
-          buttonStyle={{
-            backgroundColor: 'transparent',
-            borderWidth: 3,
-            borderRadius: 10,
-            borderColor: '#ddd'
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            return selectedItem
-          }}
-          rowTextForSelection={(item, index) => {
-            // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
-            return item
-          }}
-        />
-        <SelectDropdown
-        ref={lngRef}
-        defaultValue={lng}
-          search
-          searchPlaceHolder={'Search Language'}
-          searchPlaceHolderColor={'#ddd'}
-          data={language}
-          defaultButtonText={'Select Language'}
-          buttonTextStyle={{color: '#ddd'}}
-          onSelect={(selectedItem, index) => {
-            _setLanguage(selectedItem)
-          }}
-          buttonStyle={{
-            marginTop: 20,
-            backgroundColor: 'transparent',
-            borderWidth: 3,
-            borderRadius: 10,
-            borderColor: '#ddd'
-          }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            return selectedItem
-          }}
-          rowTextForSelection={(item, index) => {
-            // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
-            return item
-          }}
-        />
-        <View
-          style={{
-            marginTop: 20,
-            width: width,
-            flexDirection: 'row',
-            height: 100,
-            justifyContent: 'space-evenly',
-            alignItems: 'center'
-          }}
-        >
-          <View>
-            <Text style={{ color: '#ddd', alignSelf: 'center' }}>
+                color: '#ddd',
+                fontWeight: 'bold',
+                textAlign: 'right',
+                width: 100,
+              }}>
               Min. Year
             </Text>
             <TextInput
               value={startDate}
               onChangeText={setStartDate}
-              keyboardType='number-pad'
+              keyboardType="number-pad"
               maxLength={4}
-              placeholder='Year'
-              placeholderTextColor={'#ddd'}
-              color={'#ddd'}
-              style={{
-                padding: 8,
-                width: 75,
-                borderWidth: 3,
-                borderRadius: 10,
-                borderColor: '#ddd',
-                height: 35
-              }}
+              placeholder="Year"
+              placeholderTextColor={'#999'}
+              style={styles.leftInput}
             />
           </View>
           <View>
-            <Text style={{ color: '#ddd', alignSelf: 'center' }}>
+            <Text
+              style={{
+                color: '#ddd',
+                alignSelf: 'center',
+                fontWeight: 'bold',
+                textAlign: 'left',
+                width: 100,
+              }}>
               Max. Year
             </Text>
             <TextInput
               value={endDate}
               onChangeText={setEndDate}
-              keyboardType='number-pad'
+              keyboardType="number-pad"
               maxLength={4}
-              placeholder='Year'
-              placeholderTextColor={'#ddd'}
-              color={'#ddd'}
-              style={{
-                padding: 8,
-                width: 75,
-                borderWidth: 3,
-                borderRadius: 10,
-                borderColor: '#ddd',
-                height: 35
-              }}
+              placeholder="Year"
+              placeholderTextColor={'#999'}
+              style={styles.rightInput}
             />
           </View>
         </View>
-        <TouchableOpacity onPress={()=>_clearFilter()}>
-          <Image source={require('../../assets/filter.png')} style={{tintColor: '#ddd', width: 50, height: 50}} resizeMode={'contain'} />
+        <TouchableOpacity
+          style={styles.filterButton}
+          onPress={() => _clearFilter()}>
+          <Image
+            source={require('../../assets/filter.png')}
+            style={{width: 50, height: 50, tintColor: 'pink'}}
+            resizeMode={'contain'}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={{
             width: width,
             height: 300,
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
           }}
-          onPress={() => _getMovie()}
-        >
+          onPress={() => _getMovie()}>
           <LottieView
-            style={{ height: 200 }}
-            source={require('../../animations/5884-video-movie.json')}
+            style={{height: 200}}
+            source={require('../../animations/lf30_editor_pfj5fkcm.json')}
             autoPlay
             loop
           />
         </TouchableOpacity>
         {loadingVisible && <Loader />}
-
         <MovieInfoModal
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
@@ -392,16 +228,8 @@ const Dice = ({ navigation }) => {
           errorModalVisible={errorModalVisible}
           setErrorModalVisible={setErrorModalVisible}
         />
+      </ImageBackground>
     </SafeAreaView>
-  )
-}
-export { Dice }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  }
-})
+  );
+};
+export {Dice};
