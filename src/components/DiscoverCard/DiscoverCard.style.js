@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
   discoverCard: {
     margin: 4,
     width: width / 3,
-    height: height / 4.5,
+    height: height / 4,
     justifyContent: 'center',
     alignItems: 'center',
   },
