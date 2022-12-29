@@ -11,12 +11,12 @@ const styles = StyleSheet.create({
   headerText: {
     fontWeight: 'bold',
     fontSize: 20,
-    color: 'black',
+    color: 'pink',
   },
   headerView: {
     paddingTop: 30,
     paddingBottom: 4,
-    paddingLeft: 10,
+    paddingLeft: 40,
     borderRadius: 30,
     marginLeft: 3,
     marginRight: 3,
