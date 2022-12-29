@@ -28,7 +28,6 @@ const DiscoverCard = ({item}) => {
             alignItems: 'center',
           }}>
           <ImagedCarouselCard
-            borderRadius={75}
             text={item?.title}
             textStyle={{
               color: '#ddd',
