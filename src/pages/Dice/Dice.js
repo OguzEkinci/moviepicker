@@ -21,6 +21,7 @@ import {genres, genresWithId} from '../../data/genresData';
 import {isEmpty} from 'lodash';
 import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
+import LinearGradient from 'react-native-linear-gradient';
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
   const [loadingVisible, setLoadingVisible] = useState(false);
@@ -86,14 +87,17 @@ const Dice = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground
+      <LinearGradient
         style={{
           flex: 1,
+          paddingTop: 40,
           justifyContent: 'center',
           alignItems: 'center',
-          paddingTop: 50,
         }}
-        source={require('../../assets/background.png')}>
+        start={{x: 0.0, y: 0.25}}
+        end={{x: 0.5, y: 1.0}}
+        locations={[0, 0.5, 0.6]}
+        colors={['#4c669f', '#3b5998', '#192f6a']}>
         <SelectDropdown
           ref={categoryRef}
           defaultValue={category}
@@ -102,7 +106,7 @@ const Dice = ({navigation}) => {
           searchPlaceHolderColor={'black'}
           data={genres}
           defaultButtonText={'Select Category'}
-          buttonTextStyle={{color: '#ddd', fontWeight: 'bold'}}
+          buttonTextStyle={{color: 'pink', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
             _setCategoryId(selectedItem);
           }}
@@ -126,7 +130,7 @@ const Dice = ({navigation}) => {
           searchPlaceHolderColor={'darkgrey'}
           data={language}
           defaultButtonText={'Select Language'}
-          buttonTextStyle={{color: '#ddd', fontWeight: 'bold'}}
+          buttonTextStyle={{color: 'pink', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
             _setLanguage(selectedItem);
           }}
@@ -154,7 +158,7 @@ const Dice = ({navigation}) => {
           <View>
             <Text
               style={{
-                color: '#ddd',
+                color: 'pink',
                 fontWeight: 'bold',
                 textAlign: 'right',
                 width: 100,
@@ -167,14 +171,14 @@ const Dice = ({navigation}) => {
               keyboardType="number-pad"
               maxLength={4}
               placeholder="Year"
-              placeholderTextColor={'#999'}
+              placeholderTextColor={'pink'}
               style={styles.leftInput}
             />
           </View>
           <View>
             <Text
               style={{
-                color: '#ddd',
+                color: 'pink',
                 alignSelf: 'center',
                 fontWeight: 'bold',
                 textAlign: 'left',
@@ -188,7 +192,7 @@ const Dice = ({navigation}) => {
               keyboardType="number-pad"
               maxLength={4}
               placeholder="Year"
-              placeholderTextColor={'#999'}
+              placeholderTextColor={'pink'}
               style={styles.rightInput}
             />
           </View>
@@ -228,7 +232,7 @@ const Dice = ({navigation}) => {
           errorModalVisible={errorModalVisible}
           setErrorModalVisible={setErrorModalVisible}
         />
-      </ImageBackground>
+      </LinearGradient>
     </SafeAreaView>
   );
 };
