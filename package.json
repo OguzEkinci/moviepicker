@@ -34,6 +34,7 @@
     "react-native-screens": "^3.17.0",
     "react-native-scroll-up-container": "^1.0.6",
     "react-native-select-dropdown": "^3.0.3",
+    "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "^13.1.0",
     "react-native-utils-navigation-bar": "^2.0.4",
     "react-native-vector-icons": "^9.2.0",
