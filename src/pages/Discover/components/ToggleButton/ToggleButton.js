@@ -21,7 +21,15 @@ const ToggleButton = ({onPress, timeRange, setTimeRange}) => {
             backgroundColor: timeRange === 'day' ? '#ff685d' : 'gray',
           },
         ]}>
-        <Text style={{color: '#ddd'}}>Day</Text>
+        <Text
+          style={{
+            color: '#ddd',
+            fontSize: 13,
+            paddingBottom: 5,
+            fontWeight: 'bold',
+          }}>
+          Day
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={rightHandle}
@@ -31,7 +39,15 @@ const ToggleButton = ({onPress, timeRange, setTimeRange}) => {
             backgroundColor: timeRange !== 'day' ? '#ff685d' : 'gray',
           },
         ]}>
-        <Text style={{color: '#ddd'}}>Week</Text>
+        <Text
+          style={{
+            color: '#ddd',
+            fontSize: 12,
+            paddingBottom: 2,
+            fontWeight: 'bold',
+          }}>
+          Week
+        </Text>
       </TouchableOpacity>
     </View>
   );
