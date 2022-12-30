@@ -12,14 +12,10 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import LottieView from 'lottie-react-native';
-import ImagedCarouselCard from 'react-native-imaged-carousel-card';
-import {FlashList} from '@shopify/flash-list';
 import {styles} from './Discover.style';
 import LinearGradient from 'react-native-linear-gradient';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
-import {Loader, MovieInfoModal} from '../../components';
-import {Portal, PortalHost} from '@gorhom/portal';
+import {Loader} from '../../components';
 import {getPopular} from '../../services/DiscoverServices/getPopular';
 import {getTopRated} from '../../services/DiscoverServices/getTopRated';
 import {getTrending} from '../../services/DiscoverServices/getTrending';
