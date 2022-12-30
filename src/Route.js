@@ -1,13 +1,20 @@
-import React, {Children, useState} from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Fav} from './pages/Fav/index';
 import {Dice} from './pages/Dice/index';
 import {Discover} from './pages/Discover/index';
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Text,
+  Image,
+  TouchableOpacity,
+  AsyncStorage,
+} from 'react-native';
 import {PortalProvider} from '@gorhom/portal';
-const Stack = createNativeStackNavigator();
+import {useDispatch} from 'react-redux';
+import {setFavList} from './redux/fav-list/action';
 const Tab = createBottomTabNavigator();
 
 const CustomTabBarButton = ({children, onPress}) => {
@@ -26,6 +33,8 @@ const CustomTabBarButton = ({children, onPress}) => {
 };
 
 export default function App() {
+  const dispatch = useDispatch();
+  dispatch(setFavList(AsyncStorage.getItem('@favList')));
   return (
     <PortalProvider>
       <NavigationContainer>
