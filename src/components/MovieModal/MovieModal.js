@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {genresWithId} from '../../data/genresData';
+import FavButton from '../Button/FavButton';
 import {styles} from './MovieModal.style';
 const {width, height} = Dimensions.get('screen');
 const MovieInfoModal = props => {
@@ -44,6 +45,12 @@ const MovieInfoModal = props => {
             justifyContent: 'flex-start',
             alignItems: 'center',
           }}>
+          <View style={{width: '100%'}}>
+            <FavButton
+              movieObject={movieInfo}
+              setModalVisible={setModalVisible}
+            />
+          </View>
           <ScrollView
             style={{flexGrow: 1, width: width}}
             contentContainerStyle={{
