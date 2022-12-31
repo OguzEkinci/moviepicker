@@ -14,9 +14,8 @@ import {styles} from './DiscoverCard.style';
 const {width} = Dimensions.get('window');
 const DiscoverCard = ({item}) => {
   const [modalVisible, setModalVisible] = useState(false);
-
   return (
-    <View>
+    <View style={styles.container}>
       <TouchableWithoutFeedback
         onPress={() => {
           setModalVisible(true);
