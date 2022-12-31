@@ -12,6 +12,7 @@ import {
   Alert,
   TextInput,
   ImageBackground,
+  AsyncStorage,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import {MovieInfoModal, ErrorModal, Loader} from '../../components';
@@ -22,6 +23,9 @@ import {isEmpty} from 'lodash';
 import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
 import LinearGradient from 'react-native-linear-gradient';
+import {useDispatch, useSelector} from 'react-redux';
+import FavButton from '../../components/Button/FavButton';
+import {setFavList} from '../../redux/fav-list/action';
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
   const [loadingVisible, setLoadingVisible] = useState(false);
@@ -34,6 +38,7 @@ const Dice = ({navigation}) => {
   const [lng, setLanguage] = useState('');
   const lngRef = useRef(null);
   const categoryRef = useRef(null);
+
   const _getMovie = async () => {
     setLoadingVisible(true);
     const randomNumberFilter = Math.floor(Math.random() * 500) + 1;
@@ -85,6 +90,7 @@ const Dice = ({navigation}) => {
     lngRef.current?.reset();
     categoryRef.current?.reset();
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -94,10 +100,7 @@ const Dice = ({navigation}) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        start={{x: 0.0, y: 0.25}}
-        end={{x: 0.5, y: 1.0}}
-        locations={[0, 0.5, 0.6]}
-        colors={['#4c669f', '#3b5998', '#192f6a']}>
+        colors={['#621ef4', '#b291fb']}>
         <SelectDropdown
           ref={categoryRef}
           defaultValue={category}
