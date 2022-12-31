@@ -1,46 +1,53 @@
-import React from 'react'
+import {isArray} from 'lodash';
+import React, {useEffect, useState} from 'react';
 import {
   Dimensions,
-  Image,
   SafeAreaView,
   StyleSheet,
+  ScrollView,
+  View,
   Text,
-  TouchableOpacity,
-  View
-} from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
-const { width, height } = Dimensions.get('screen')
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {useSelector} from 'react-redux';
+import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
+import styles from './Fav.style';
+const {width, height} = Dimensions.get('screen');
 
-const Fav = ({ navigation }) => {
+const Fav = () => {
+  const favList = useSelector(state => state.favList);
+
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
         style={{
           flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center'
         }}
-        colors={['#ddd', '#ddd', '#333']}
-      >
-        <Text>DENEM</Text>
+        colors={['#621ef4', '#b291fb']}>
+        <ScrollView
+          contentContainerStyle={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'space-evenly',
+          }}>
+          <View style={styles.headerView}>
+            <Text style={styles.headerText}>SAVED</Text>
+          </View>
+          {isArray(favList) &&
+            favList?.map((item, index) => (
+              <View style={{margin: 5}}>
+                <DiscoverCard item={item} key={index} />
+              </View>
+            ))}
+          <View
+            style={{
+              height: height * 0.14,
+              width: width,
+            }}
+          />
+        </ScrollView>
       </LinearGradient>
     </SafeAreaView>
-  )
-}
-export { Fav }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#f2f2f2'
-  },
-  header: {
-    flex: 0.07,
-    width: width,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingLeft: 8,
-    paddingTop: 8
-  }
-})
+  );
+};
+export {Fav};
