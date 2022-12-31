@@ -34,7 +34,20 @@ const CustomTabBarButton = ({children, onPress}) => {
 
 export default function App() {
   const dispatch = useDispatch();
-  dispatch(setFavList(AsyncStorage.getItem('@favList')));
+  useEffect(() => {
+    const getItem = async () => {
+      try {
+        const favList = await AsyncStorage.getItem('@FavList');
+        const parsedValue = JSON.parse(favList);
+        dispatch(setFavList(parsedValue));
+        console.log(parsedValue);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItem();
+  }, []);
+
   return (
     <PortalProvider>
       <NavigationContainer>
@@ -48,7 +61,7 @@ export default function App() {
               left: 20,
               right: 20,
               elevation: 0,
-              backgroundColor: '#4c669f',
+              backgroundColor: '#621ef4',
               borderRadius: 15,
               height: 70,
               ...styles.shadow,
@@ -59,7 +72,7 @@ export default function App() {
             component={Discover}
             options={{
               tabBarIcon: ({focused}) => {
-                return focused ? (
+                return (
                   <View
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
@@ -68,26 +81,15 @@ export default function App() {
                         width: 30,
                         height: 30,
                         bottom: 2,
-                        tintColor: '#ddd',
+                        tintColor: 'pink',
                       }}
-                      source={require('./assets/compass-active.png')}
+                      source={
+                        focused
+                          ? require('./assets/compass-active.png')
+                          : require('./assets/compass.png')
+                      }
                     />
-                    <Text style={{color: '#ddd', fontSize: 12}}>Discover</Text>
-                  </View>
-                ) : (
-                  <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Image
-                      resizeMode="contain"
-                      style={{
-                        width: 30,
-                        height: 30,
-                        bottom: 2,
-                        tintColor: '#ddd',
-                      }}
-                      source={require('./assets/compass.png')}
-                    />
-                    <Text style={{color: '#ddd', fontSize: 12}}>Discover</Text>
+                    <Text style={{color: 'pink', fontSize: 12}}>Discover</Text>
                   </View>
                 );
               },
@@ -99,7 +101,7 @@ export default function App() {
             component={Dice}
             options={{
               tabBarIcon: ({focused}) => {
-                return focused ? (
+                return (
                   <View
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
@@ -108,23 +110,13 @@ export default function App() {
                         width: 75,
                         height: 75,
                         bottom: 2,
-                        tintColor: '#ddd',
+                        tintColor: 'pink',
                       }}
-                      source={require('./assets/clapperboard-active.png')}
-                    />
-                  </View>
-                ) : (
-                  <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Image
-                      resizeMode="contain"
-                      style={{
-                        width: 75,
-                        height: 75,
-                        bottom: 2,
-                        tintColor: '#ddd',
-                      }}
-                      source={require('./assets/clapperboard.png')}
+                      source={
+                        focused
+                          ? require('./assets/clapperboard-active.png')
+                          : require('./assets/clapperboard.png')
+                      }
                     />
                   </View>
                 );
@@ -140,7 +132,7 @@ export default function App() {
             component={Fav}
             options={{
               tabBarIcon: ({focused}) => {
-                return focused ? (
+                return (
                   <View
                     style={{alignItems: 'center', justifyContent: 'center'}}>
                     <Image
@@ -149,26 +141,15 @@ export default function App() {
                         width: 40,
                         height: 40,
                         bottom: 2,
-                        tintColor: '#ddd',
+                        tintColor: 'pink',
                       }}
-                      source={require('./assets/favourite-active.png')}
+                      source={
+                        focused
+                          ? require('./assets/favourite-active.png')
+                          : require('./assets/favourite.png')
+                      }
                     />
-                    <Text style={{color: '#ddd', fontSize: 12}}>Saved</Text>
-                  </View>
-                ) : (
-                  <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
-                    <Image
-                      resizeMode="contain"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        bottom: 2,
-                        tintColor: '#ddd',
-                      }}
-                      source={require('./assets/favourite.png')}
-                    />
-                    <Text style={{color: '#ddd', fontSize: 12}}>Saved</Text>
+                    <Text style={{color: 'pink', fontSize: 12}}>Saved</Text>
                   </View>
                 );
               },
@@ -185,7 +166,7 @@ export {App};
 
 const styles = StyleSheet.create({
   shadow: {
-    shadowColor: '#7F5DF0',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 10,
