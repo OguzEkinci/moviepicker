@@ -8,5 +8,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  container: {
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 16.0,
+    elevation: 12,
+  },
 });
 export {styles};
