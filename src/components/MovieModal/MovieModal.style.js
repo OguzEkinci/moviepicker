@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flex: 0.9,
     paddingTop: 0,
-    paddingBottom: 12,
-    paddingLeft: 12,
-    paddingRight: 12,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -77,11 +74,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 340,
     marginTop: 16,
+    paddingBottom: 16,
   },
   icon: {
     width: 15,
     height: 15,
     marginRight: 3,
+  },
+  backgroundVideo: {
+    width: 300,
+    height: 300,
   },
 });
 export {styles};
