@@ -1,11 +1,11 @@
-import axios from 'axios'
-import { locale } from '../../assets/util/phoneLanguage'
+import axios from 'axios';
+import {locale} from '../../assets/util/phoneLanguage';
 export const getFilterMovieDetail = (
   id,
   startDate,
   endDate,
   category,
-  language
+  language,
 ) => {
   return axios({
     method: 'get',
@@ -19,8 +19,7 @@ export const getFilterMovieDetail = (
       'primary_release_date.gte': startDate,
       'primary_release_date.lte': endDate,
       with_genres: category.toString(),
-      include_video: true,
-      with_original_language: language.toString()
-    }
-  })
-}
+      with_original_language: language.toString(),
+    },
+  });
+};
