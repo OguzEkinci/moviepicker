@@ -1,17 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {
-  SafeAreaView,
-  Animated,
-  Easing,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-  View,
-  Image,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {SafeAreaView, Text, Dimensions, View, ScrollView} from 'react-native';
 import {styles} from './Discover.style';
 import LinearGradient from 'react-native-linear-gradient';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
@@ -21,11 +9,10 @@ import {getTopRated} from '../../services/DiscoverServices/getTopRated';
 import {getTrending} from '../../services/DiscoverServices/getTrending';
 import ToggleButton from './components/ToggleButton/ToggleButton';
 import Carousel from 'react-native-snap-carousel';
-const {width, height} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.25);
-const ITEM_HEIGHT = Math.round((ITEM_WIDTH * 3) / 4);
-const Discover = ({navigation}) => {
+const Discover = () => {
   const [popularList, setPopularList] = useState([]);
   const [topRatedList, setTopRatedList] = useState([]);
   const [trendingList, setTrendingList] = useState([]);
@@ -123,12 +110,6 @@ const Discover = ({navigation}) => {
                 paddingLeft: 70,
               }}
             />
-            {/* <FlatList
-              data={popularList}
-              horizontal
-              renderItem={renderListCard}
-              estimatedItemSize={400}
-            /> */}
           </ScrollView>
           <ScrollView>
             <View style={styles.headerView}>
@@ -145,12 +126,6 @@ const Discover = ({navigation}) => {
                 paddingLeft: 70,
               }}
             />
-            {/* <FlatList
-              data={topRatedList}
-              horizontal
-              renderItem={renderListCard}
-              estimatedItemSize={400}
-            /> */}
           </ScrollView>
           <View style={{height: height * 0.14}} />
         </ScrollView>
