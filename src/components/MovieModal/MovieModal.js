@@ -12,11 +12,28 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {genresWithId} from '../../data/genresData';
+import {getVideo} from '../../services/GetVideo/GetVideo';
 import FavButton from '../Button/FavButton';
+import {ErrorModal} from '../ErrorModal/ErrorModal';
+import VideoFrame from '../VideoFrame/VideoFrame';
+import VideoModal from '../VideoFrame/VideoFrame';
 import {styles} from './MovieModal.style';
 const {width, height} = Dimensions.get('screen');
 const MovieInfoModal = props => {
   const {modalVisible, setModalVisible, movieInfo} = props;
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
+  const [videoKey, setVideoKey] = useState('');
+
+  useEffect(() => {
+    getVideo(movieInfo?.id)
+      .then(res => {
+        setVideoKey(res.data?.results[0]?.key);
+      })
+      .catch(() => {
+        setErrorModalVisible(true);
+      });
+  }, []);
+
   return (
     <Modal
       style={{margin: 9}}
@@ -70,27 +87,16 @@ const MovieInfoModal = props => {
             </View>
           )}
 
-          {!movieInfo?.poster_path ? (
-            <Image
-              source={require('../../assets/gallery.png')}
-              resizeMode={'contain'}
-              style={{width: width - 40, height: 300}}
-            />
-          ) : (
-            <Image
-              source={{
-                uri: `https://image.tmdb.org/t/p/w500${movieInfo?.poster_path}`,
-              }}
-              resizeMode={'contain'}
-              style={{width: width - 40, height: 300}}
-            />
-          )}
-
           <View
             style={{
               marginTop: 10,
             }}>
             <View>
+              {movieInfo?.overview ? (
+                <Text style={styles.mainText}>{movieInfo.overview}</Text>
+              ) : (
+                <Text style={styles.mainText}>No overview</Text>
+              )}
               <View style={styles.genresView}>
                 {isArray(movieInfo?.genre_ids) &&
                   movieInfo?.genre_ids.map((genre_id, ind) =>
@@ -106,11 +112,7 @@ const MovieInfoModal = props => {
                     ),
                   )}
               </View>
-              {movieInfo?.overview ? (
-                <Text style={styles.mainText}>{movieInfo.overview}</Text>
-              ) : (
-                <Text style={styles.mainText}>No overview</Text>
-              )}
+              <VideoFrame videoKey={videoKey} />
             </View>
           </View>
 
@@ -147,14 +149,33 @@ const MovieInfoModal = props => {
                 <Text>{movieInfo?.popularity}</Text>
               </View>
             )}
-            {/* {movieInfo?.spoken_languages && movieInfo?.spoken_languages.map((item, index) => {
-                            return <View key={index} style={{ justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                                <Image source={require('../../assets/language.png')} resizeMode="center" style={styles.icon} />
-                                <Text>{item.english_name}</Text>
-                            </View>
-                        })} */}
           </View>
         </ScrollView>
+        {!movieInfo?.poster_path ? (
+          <Image
+            source={require('../../assets/gallery.png')}
+            resizeMode={'contain'}
+            style={{width: width - 40, height: 300}}
+          />
+        ) : (
+          <Image
+            source={{
+              uri: `https://image.tmdb.org/t/p/w500${movieInfo?.poster_path}`,
+            }}
+            resizeMode={'cover'}
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'absolute',
+              zIndex: -1,
+              opacity: 0.3,
+            }}
+          />
+        )}
+        <ErrorModal
+          errorModalVisible={errorModalVisible}
+          setErrorModalVisible={setErrorModalVisible}
+        />
       </View>
     </Modal>
   );
