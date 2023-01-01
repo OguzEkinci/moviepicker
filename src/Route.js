@@ -54,6 +54,7 @@ export default function App() {
         <Tab.Navigator
           initialRouteName="Dice"
           screenOptions={{
+            tabBarHideOnKeyboard: true,
             tabBarShowLabel: false,
             tabBarStyle: {
               position: 'absolute',
