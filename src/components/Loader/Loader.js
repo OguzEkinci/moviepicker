@@ -9,7 +9,7 @@ const Loader = () => {
         <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
           <LottieView
             style={{height: 400}}
-            source={require('../../animations/1961-movie-loading.json')}
+            source={require('../../animations/97111-loading-spinner-dots.json')}
             autoPlay
             loop
           />
