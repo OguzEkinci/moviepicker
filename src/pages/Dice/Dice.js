@@ -1,18 +1,12 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   SafeAreaView,
-  Animated,
-  Easing,
   Text,
-  StyleSheet,
   Dimensions,
   TouchableOpacity,
   View,
   Image,
-  Alert,
   TextInput,
-  ImageBackground,
-  AsyncStorage,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import {MovieInfoModal, ErrorModal, Loader} from '../../components';
@@ -23,9 +17,7 @@ import {isEmpty} from 'lodash';
 import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
 import LinearGradient from 'react-native-linear-gradient';
-import {useDispatch, useSelector} from 'react-redux';
-import FavButton from '../../components/Button/FavButton';
-import {setFavList} from '../../redux/fav-list/action';
+
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
   const [loadingVisible, setLoadingVisible] = useState(false);
