@@ -4,14 +4,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Fav} from './pages/Fav/index';
 import {Dice} from './pages/Dice/index';
 import {Discover} from './pages/Discover/index';
-import {
-  View,
-  StyleSheet,
-  Text,
-  Image,
-  TouchableOpacity,
-  AsyncStorage,
-} from 'react-native';
+import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PortalProvider} from '@gorhom/portal';
 import {useDispatch} from 'react-redux';
 import {setFavList} from './redux/fav-list/action';
