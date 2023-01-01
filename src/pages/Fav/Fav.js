@@ -16,7 +16,6 @@ const {width, height} = Dimensions.get('screen');
 
 const Fav = () => {
   const favList = useSelector(state => state.favList);
-
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
@@ -35,8 +34,8 @@ const Fav = () => {
           </View>
           {isArray(favList) &&
             favList?.map((item, index) => (
-              <View style={{margin: 5}}>
-                <DiscoverCard item={item} key={index} />
+              <View style={{margin: 5}} key={index}>
+                <DiscoverCard item={item} />
               </View>
             ))}
           <View
