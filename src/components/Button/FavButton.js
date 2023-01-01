@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {AsyncStorage, Image, TouchableOpacity, View} from 'react-native';
+import {Image, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setFavList} from '../../redux/fav-list/action';
 import {styles} from './FavButton.style';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const FavButton = ({movieObject, setModalVisible}) => {
   const [addedFav, setAddedFav] = useState(false);
   const dispatch = useDispatch();
