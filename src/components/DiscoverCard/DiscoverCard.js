@@ -8,14 +8,14 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import ImagedCarouselCard from 'react-native-imaged-carousel-card';
+import ImageBackgroundCard from '../MovieCard/ImageBackGroundCard';
 import {MovieInfoModal} from '../MovieModal/MovieModal';
 import {styles} from './DiscoverCard.style';
 const {width} = Dimensions.get('window');
-const DiscoverCard = ({item}) => {
+const DiscoverCard = ({item, key}) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View style={styles.container}>
+    <View key={key} style={styles.container}>
       <TouchableWithoutFeedback
         onPress={() => {
           setModalVisible(true);
@@ -26,14 +26,15 @@ const DiscoverCard = ({item}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <ImagedCarouselCard
+          <ImageBackgroundCard
             text={item?.title}
             textStyle={{
               color: '#ddd',
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: 'bold',
               textAlign: 'center',
-              overflow: 'hidden',
+              paddingLeft: 5,
+              paddingRight: 5,
             }}
             overlayBackgroundColor="#051934"
             style={styles.discoverCard}
