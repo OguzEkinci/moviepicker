@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {AsyncStorage, Image, TouchableOpacity} from 'react-native';
+import {AsyncStorage, Image, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setFavList} from '../../redux/fav-list/action';
 import {styles} from './FavButton.style';
@@ -11,9 +11,7 @@ const FavButton = ({movieObject, setModalVisible}) => {
       try {
         const favList = await AsyncStorage.getItem('@FavList');
         const parsedValue = JSON.parse(favList);
-        setAddedFav(
-          parsedValue.find(item => item?.original_title === movieObject?.title),
-        );
+        setAddedFav(parsedValue.find(item => item?.id === movieObject?.id));
       } catch (e) {
         console.log(e);
       }
@@ -65,16 +63,35 @@ const FavButton = ({movieObject, setModalVisible}) => {
     }
   };
   return (
-    <TouchableOpacity onPress={handlePress}>
-      <Image
-        style={styles.image}
-        source={
-          !addedFav
-            ? require('../../assets/favourite.png')
-            : require('../../assets/favourite-active.png')
-        }
-      />
-    </TouchableOpacity>
+    <View
+      style={{
+        width: '100%',
+        top: -12,
+      }}>
+      <TouchableOpacity
+        style={{
+          width: 60,
+          height: 70,
+          shadowColor: 'black',
+          shadowOffset: {
+            width: 0,
+            height: 12,
+          },
+          shadowOpacity: 0.58,
+          shadowRadius: 16.0,
+          elevation: 24,
+        }}
+        onPress={handlePress}>
+        <Image
+          style={styles.image}
+          source={
+            !addedFav
+              ? require('../../assets/bookmark-add.png')
+              : require('../../assets/bookmark.png')
+          }
+        />
+      </TouchableOpacity>
+    </View>
   );
 };
 
