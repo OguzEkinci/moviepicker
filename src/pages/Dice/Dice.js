@@ -39,6 +39,7 @@ const Dice = ({navigation}) => {
   const lngRef = useRef(null);
   const categoryRef = useRef(null);
 
+  let counter = 0;
   const _getMovie = async () => {
     setLoadingVisible(true);
     const randomNumberFilter = Math.floor(Math.random() * 500) + 1;
@@ -50,6 +51,7 @@ const Dice = ({navigation}) => {
       lng,
     )
       .then(res => {
+        counter++;
         const randomNumberFilterMovie =
           Math.floor(Math.random() * res.data.results.length) + 1;
         if (
@@ -60,7 +62,12 @@ const Dice = ({navigation}) => {
           setModalVisible(true);
           setLoadingVisible(false);
         } else {
-          _getMovie();
+          if (counter === 20) {
+            //20 kere istek attıktan sonra film bulamadıysa işlemi durduracak
+            counter = 0;
+            setLoadingVisible(false);
+            return setErrorModalVisible(true);
+          } else _getMovie();
         }
       })
       .catch(err => {
@@ -106,9 +113,16 @@ const Dice = ({navigation}) => {
           defaultValue={category}
           search
           searchPlaceHolder={'Search Category'}
-          searchPlaceHolderColor={'black'}
+          searchPlaceHolderColor={'#ddd'}
           data={genres}
           defaultButtonText={'Select Category'}
+          dropdownStyle={{
+            backgroundColor: 'pink',
+            borderBottomRightRadius: 50,
+            borderBottomLeftRadius: 50,
+          }}
+          searchInputStyle={{backgroundColor: 'lightcoral'}}
+          searchInputTxtColor={'white'}
           buttonTextStyle={{color: 'pink', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
             _setCategoryId(selectedItem);
@@ -130,9 +144,16 @@ const Dice = ({navigation}) => {
           defaultValue={lng}
           search
           searchPlaceHolder={'Search Language'}
-          searchPlaceHolderColor={'darkgrey'}
+          searchPlaceHolderColor={'#ddd'}
           data={language}
           defaultButtonText={'Select Language'}
+          dropdownStyle={{
+            backgroundColor: 'pink',
+            borderBottomRightRadius: 50,
+            borderBottomLeftRadius: 50,
+          }}
+          searchInputStyle={{backgroundColor: 'lightcoral'}}
+          searchInputTxtColor={'white'}
           buttonTextStyle={{color: 'pink', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
             _setLanguage(selectedItem);
@@ -219,7 +240,7 @@ const Dice = ({navigation}) => {
           onPress={() => _getMovie()}>
           <LottieView
             style={{height: 200}}
-            source={require('../../animations/lf30_editor_pfj5fkcm.json')}
+            source={require('../../animations/lf30_editor_sz1eggwj.json')}
             autoPlay
             loop
           />
