@@ -18,7 +18,6 @@ const DiscoverCard = ({item, key}) => {
           <View
             style={{
               backgroundColor: '#323232',
-              marginRight: 5,
               flex: 0.35,
               height: 175,
               borderRadius: 10,
@@ -36,14 +35,14 @@ const DiscoverCard = ({item, key}) => {
           <View
             style={{
               backgroundColor: '#323232',
-              borderRadius: 25,
+              borderBottomRightRadius: 75,
               flex: 0.65,
               height: 125,
               paddingTop: 20,
               padding: 12,
             }}>
             <Text
-              numberOfLines={2}
+              numberOfLines={1}
               style={{color: '#c7c7c7', fontWeight: 'bold', fontSize: 14}}>
               {item?.title}
             </Text>
