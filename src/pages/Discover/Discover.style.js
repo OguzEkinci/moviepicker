@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontWeight: 'bold',
-    color: 'pink',
-    backgroundColor: '#a0587e',
+    color: '#c7c7c7',
+    backgroundColor: '#323232',
     textAlign: 'right',
     fontSize: 18,
     lineHeight: 40,

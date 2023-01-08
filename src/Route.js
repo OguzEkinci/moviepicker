@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Fav} from './pages/Fav/index';
 import {Dice} from './pages/Dice/index';
 import {Discover} from './pages/Discover/index';
-import {View, StyleSheet, Text, Image, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PortalProvider} from '@gorhom/portal';
 import {useDispatch} from 'react-redux';
@@ -52,13 +52,12 @@ export default function App() {
             tabBarShowLabel: false,
             tabBarStyle: {
               position: 'absolute',
-              bottom: 15,
-              left: 20,
-              right: 20,
               elevation: 0,
-              backgroundColor: '#621ef4',
-              borderRadius: 15,
-              height: 70,
+              backgroundColor: '#323232',
+              borderTopLeftRadius: 50,
+              borderTopRightRadius: 50,
+              height: 90,
+              opacity: 0.8,
               ...styles.shadow,
             },
           }}>
@@ -69,14 +68,19 @@ export default function App() {
               tabBarIcon: ({focused}) => {
                 return (
                   <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
+                    elevation={24}
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                    }}>
                     <Image
                       resizeMode="contain"
                       style={{
                         width: 30,
                         height: 30,
                         bottom: 2,
-                        tintColor: 'pink',
+                        tintColor: focused ? '#00f9f9' : '#c7c7c7',
                       }}
                       source={
                         focused
@@ -84,7 +88,6 @@ export default function App() {
                           : require('./assets/compass.png')
                       }
                     />
-                    <Text style={{color: 'pink', fontSize: 12}}>Discover</Text>
                   </View>
                 );
               },
@@ -98,14 +101,19 @@ export default function App() {
               tabBarIcon: ({focused}) => {
                 return (
                   <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
+                    elevation={24}
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                    }}>
                     <Image
                       resizeMode="contain"
                       style={{
                         width: 75,
                         height: 75,
                         bottom: 2,
-                        tintColor: 'pink',
+                        tintColor: focused ? '#00f9f9' : '#c7c7c7',
                       }}
                       source={
                         focused
@@ -129,14 +137,19 @@ export default function App() {
               tabBarIcon: ({focused}) => {
                 return (
                   <View
-                    style={{alignItems: 'center', justifyContent: 'center'}}>
+                    elevation={24}
+                    style={{
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                    }}>
                     <Image
                       resizeMode="contain"
                       style={{
                         width: 40,
                         height: 40,
                         bottom: 2,
-                        tintColor: 'pink',
+                        tintColor: focused ? '#00f9f9' : '#c7c7c7',
                       }}
                       source={
                         focused
@@ -144,7 +157,6 @@ export default function App() {
                           : require('./assets/favourite.png')
                       }
                     />
-                    <Text style={{color: 'pink', fontSize: 12}}>Saved</Text>
                   </View>
                 );
               },

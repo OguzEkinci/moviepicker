@@ -1,14 +1,13 @@
 import {isArray} from 'lodash';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {
   Dimensions,
   SafeAreaView,
-  StyleSheet,
   ScrollView,
   View,
   Text,
+  ImageBackground,
 } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import {useSelector} from 'react-redux';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import styles from './Fav.style';
@@ -18,16 +17,14 @@ const Fav = () => {
   const favList = useSelector(state => state.favList);
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
+      <ImageBackground
         style={{
           flex: 1,
         }}
-        colors={['#621ef4', '#b291fb']}>
+        source={require('../../assets/background.jpg')}>
         <ScrollView
           contentContainerStyle={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            justifyContent: 'space-evenly',
+            flexDirection: 'column',
           }}>
           <View style={styles.headerView}>
             <Text style={styles.headerText}>SAVED</Text>
@@ -45,7 +42,7 @@ const Fav = () => {
             }}
           />
         </ScrollView>
-      </LinearGradient>
+      </ImageBackground>
     </SafeAreaView>
   );
 };

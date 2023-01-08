@@ -18,12 +18,12 @@ const ToggleButton = ({onPress, timeRange, setTimeRange}) => {
         style={[
           styles.leftButton,
           {
-            backgroundColor: timeRange === 'day' ? '#ff685d' : 'gray',
+            backgroundColor: timeRange === 'day' ? '#00f9f9' : '#c7c7c7',
           },
         ]}>
         <Text
           style={{
-            color: '#ddd',
+            color: '#323232',
             fontSize: 13,
             paddingBottom: 5,
             fontWeight: 'bold',
@@ -36,12 +36,12 @@ const ToggleButton = ({onPress, timeRange, setTimeRange}) => {
         style={[
           styles.rightButton,
           {
-            backgroundColor: timeRange !== 'day' ? '#ff685d' : 'gray',
+            backgroundColor: timeRange !== 'day' ? '#00f9f9' : '#c7c7c7',
           },
         ]}>
         <Text
           style={{
-            color: '#ddd',
+            color: '#323232',
             fontSize: 12,
             paddingBottom: 2,
             fontWeight: 'bold',

@@ -1,8 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, Text, Dimensions, View, ScrollView} from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  Dimensions,
+  View,
+  ScrollView,
+  ImageBackground,
+} from 'react-native';
 import {styles} from './Discover.style';
-import LinearGradient from 'react-native-linear-gradient';
-import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import {Loader} from '../../components';
 import {getPopular} from '../../services/DiscoverServices/getPopular';
 import {getTopRated} from '../../services/DiscoverServices/getTopRated';
@@ -45,7 +50,7 @@ const Discover = () => {
   }, []);
 
   const renderListCard = ({item}) => {
-    return <DiscoverCard item={item} />;
+    return <View></View>;
   };
 
   const handleToggle = () => {
@@ -60,13 +65,13 @@ const Discover = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
+      <ImageBackground
         style={{
           flex: 1,
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        colors={['#621ef4', '#b291fb']}>
+        source={require('../../assets/background.jpg')}>
         <ScrollView>
           <ScrollView>
             <View style={styles.headerView}>
@@ -130,7 +135,7 @@ const Discover = () => {
           <View style={{height: height * 0.14}} />
         </ScrollView>
         {loadingVisible && <Loader />}
-      </LinearGradient>
+      </ImageBackground>
     </SafeAreaView>
   );
 };

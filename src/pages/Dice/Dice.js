@@ -7,6 +7,9 @@ import {
   View,
   Image,
   TextInput,
+  ImageBackground,
+  PlatformColor,
+  Appearance,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
 import {MovieInfoModal, ErrorModal, Loader} from '../../components';
@@ -92,30 +95,30 @@ const Dice = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
+      <ImageBackground
         style={{
           flex: 1,
           paddingTop: 40,
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        colors={['#621ef4', '#b291fb']}>
+        source={require('../../assets/background.jpg')}>
         <SelectDropdown
           ref={categoryRef}
           defaultValue={category}
           search
           searchPlaceHolder={'Search Category'}
-          searchPlaceHolderColor={'#ddd'}
+          searchPlaceHolderColor={'black'}
           data={genres}
           defaultButtonText={'Select Category'}
           dropdownStyle={{
-            backgroundColor: 'pink',
+            backgroundColor: '#323232',
             borderBottomRightRadius: 50,
             borderBottomLeftRadius: 50,
           }}
-          searchInputStyle={{backgroundColor: 'lightcoral'}}
-          searchInputTxtColor={'white'}
-          buttonTextStyle={{color: 'pink', fontWeight: 'bold'}}
+          rowTextStyle={{color: 'white'}}
+          searchInputStyle={{backgroundColor: '#c7c7c7'}}
+          buttonTextStyle={{color: '#c7c7c7', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
             _setCategoryId(selectedItem);
           }}
@@ -136,17 +139,17 @@ const Dice = ({navigation}) => {
           defaultValue={lng}
           search
           searchPlaceHolder={'Search Language'}
-          searchPlaceHolderColor={'#ddd'}
+          searchPlaceHolderColor={'black'}
           data={language}
           defaultButtonText={'Select Language'}
           dropdownStyle={{
-            backgroundColor: 'pink',
+            backgroundColor: '#323232',
             borderBottomRightRadius: 50,
             borderBottomLeftRadius: 50,
           }}
-          searchInputStyle={{backgroundColor: 'lightcoral'}}
-          searchInputTxtColor={'white'}
-          buttonTextStyle={{color: 'pink', fontWeight: 'bold'}}
+          rowTextStyle={{color: 'white'}}
+          searchInputStyle={{backgroundColor: '#c7c7c7'}}
+          buttonTextStyle={{color: '#c7c7c7', fontWeight: 'bold'}}
           onSelect={(selectedItem, index) => {
             _setLanguage(selectedItem);
           }}
@@ -171,13 +174,19 @@ const Dice = ({navigation}) => {
             justifyContent: 'space-evenly',
             alignItems: 'center',
           }}>
-          <View>
+          <View
+            style={{
+              backgroundColor: '#c7c7c7',
+              borderBottomRightRadius: 50,
+              borderTopLeftRadius: 50,
+            }}>
             <Text
               style={{
-                color: 'pink',
+                color: '#323232',
                 fontWeight: 'bold',
                 textAlign: 'right',
                 width: 100,
+                paddingRight: 4,
               }}>
               Min. Year
             </Text>
@@ -187,18 +196,23 @@ const Dice = ({navigation}) => {
               keyboardType="number-pad"
               maxLength={4}
               placeholder="Year"
-              placeholderTextColor={'pink'}
+              placeholderTextColor={'#ddd'}
               style={styles.leftInput}
             />
           </View>
-          <View>
+          <View
+            style={{
+              backgroundColor: '#c7c7c7',
+              borderTopRightRadius: 50,
+              borderBottomLeftRadius: 50,
+            }}>
             <Text
               style={{
-                color: 'pink',
-                alignSelf: 'center',
+                color: '#323232',
                 fontWeight: 'bold',
                 textAlign: 'left',
                 width: 100,
+                paddingLeft: 4,
               }}>
               Max. Year
             </Text>
@@ -208,7 +222,7 @@ const Dice = ({navigation}) => {
               keyboardType="number-pad"
               maxLength={4}
               placeholder="Year"
-              placeholderTextColor={'pink'}
+              placeholderTextColor={'#ddd'}
               style={styles.rightInput}
             />
           </View>
@@ -218,7 +232,12 @@ const Dice = ({navigation}) => {
           onPress={() => _clearFilter()}>
           <Image
             source={require('../../assets/filter.png')}
-            style={{width: 50, height: 50, tintColor: 'pink'}}
+            style={{
+              width: 50,
+              height: 50,
+              tintColor:
+                Appearance.getColorScheme() === 'dark' ? 'gray' : '#323232',
+            }}
             resizeMode={'contain'}
           />
         </TouchableOpacity>
@@ -232,7 +251,7 @@ const Dice = ({navigation}) => {
           onPress={() => _getMovie()}>
           <LottieView
             style={{height: 200}}
-            source={require('../../animations/lf30_editor_sz1eggwj.json')}
+            source={require('../../animations/5884-video-movie.json')}
             autoPlay
             loop
           />
@@ -248,7 +267,7 @@ const Dice = ({navigation}) => {
           errorModalVisible={errorModalVisible}
           setErrorModalVisible={setErrorModalVisible}
         />
-      </LinearGradient>
+      </ImageBackground>
     </SafeAreaView>
   );
 };

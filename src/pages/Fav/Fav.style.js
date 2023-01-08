@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontWeight: 'bold',
-    color: 'pink',
-    backgroundColor: '#a0587e',
+    color: '#c7c7c7',
+    backgroundColor: '#323232',
     textAlign: 'right',
     fontSize: 18,
     lineHeight: 40,
@@ -19,14 +19,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 24,
   },
   headerView: {
     paddingTop: 30,
