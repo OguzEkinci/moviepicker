@@ -1,3 +1,2 @@
-export * from './ErrorModal/ErrorModal'
-export * from './Loader/index'
-export * from './MovieModal/MovieModal'
+export * from './ErrorModal/ErrorModal';
+export * from './Loader/index';

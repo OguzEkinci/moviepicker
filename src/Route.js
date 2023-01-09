@@ -1,16 +1,17 @@
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Fav} from './pages/Fav/index';
+import Fav from './pages/Fav/Fav';
 import {Dice} from './pages/Dice/index';
-import {Discover} from './pages/Discover/index';
+import Details from './pages/Details/Details';
+import Discover from './pages/Discover/Discover';
 import {View, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {PortalProvider} from '@gorhom/portal';
 import {useDispatch} from 'react-redux';
 import {setFavList} from './redux/fav-list/action';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const Tab = createBottomTabNavigator();
-
+const Stack = createNativeStackNavigator();
 const CustomTabBarButton = ({children, onPress}) => {
   return (
     <TouchableOpacity
@@ -26,7 +27,7 @@ const CustomTabBarButton = ({children, onPress}) => {
   );
 };
 
-export default function App() {
+const Root = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const getItem = async () => {
@@ -43,134 +44,147 @@ export default function App() {
   }, []);
 
   return (
-    <PortalProvider>
-      <NavigationContainer>
-        <Tab.Navigator
-          initialRouteName="Dice"
-          screenOptions={{
-            tabBarHideOnKeyboard: true,
-            tabBarShowLabel: false,
-            tabBarStyle: {
-              position: 'absolute',
-              elevation: 0,
-              backgroundColor: '#323232',
-              borderTopLeftRadius: 50,
-              borderTopRightRadius: 50,
-              height: 90,
-              opacity: 0.8,
-              ...styles.shadow,
-            },
-          }}>
-          <Tab.Screen
-            name="Discover"
-            component={Discover}
-            options={{
-              tabBarIcon: ({focused}) => {
-                return (
-                  <View
-                    elevation={24}
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      shadowColor: focused ? '#00f9f9' : '#c7c7c7',
-                    }}>
-                    <Image
-                      resizeMode="contain"
-                      style={{
-                        width: 30,
-                        height: 30,
-                        bottom: 2,
-                        tintColor: focused ? '#00f9f9' : '#c7c7c7',
-                      }}
-                      source={
-                        focused
-                          ? require('./assets/compass-active.png')
-                          : require('./assets/compass.png')
-                      }
-                    />
-                  </View>
-                );
-              },
-              headerShown: false,
-            }}
-          />
-          <Tab.Screen
-            name="Dice"
-            component={Dice}
-            options={{
-              tabBarIcon: ({focused}) => {
-                return (
-                  <View
-                    elevation={24}
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      shadowColor: focused ? '#00f9f9' : '#c7c7c7',
-                    }}>
-                    <Image
-                      resizeMode="contain"
-                      style={{
-                        width: 75,
-                        height: 75,
-                        bottom: 2,
-                        tintColor: focused ? '#00f9f9' : '#c7c7c7',
-                      }}
-                      source={
-                        focused
-                          ? require('./assets/clapperboard-active.png')
-                          : require('./assets/clapperboard.png')
-                      }
-                    />
-                  </View>
-                );
-              },
-              tabBarButton: props => {
-                return <CustomTabBarButton {...props} />;
-              },
-              headerShown: false,
-            }}
-          />
-          <Tab.Screen
-            name="Fav"
-            component={Fav}
-            options={{
-              tabBarIcon: ({focused}) => {
-                return (
-                  <View
-                    elevation={24}
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      shadowColor: focused ? '#00f9f9' : '#c7c7c7',
-                    }}>
-                    <Image
-                      resizeMode="contain"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        bottom: 2,
-                        tintColor: focused ? '#00f9f9' : '#c7c7c7',
-                      }}
-                      source={
-                        focused
-                          ? require('./assets/favourite-active.png')
-                          : require('./assets/favourite.png')
-                      }
-                    />
-                  </View>
-                );
-              },
-              headerShown: false,
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
-    </PortalProvider>
+    <Tab.Navigator
+      initialRouteName="Dice"
+      screenOptions={{
+        tabBarHideOnKeyboard: true,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          position: 'absolute',
+          elevation: 0,
+          backgroundColor: '#323232',
+          borderTopLeftRadius: 50,
+          borderTopRightRadius: 50,
+          height: 90,
+          opacity: 0.8,
+          ...styles.shadow,
+        },
+      }}>
+      <Tab.Screen
+        name="Discover"
+        component={Discover}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                elevation={24}
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                }}>
+                <Image
+                  resizeMode="contain"
+                  style={{
+                    width: 30,
+                    height: 30,
+                    bottom: 2,
+                    tintColor: focused ? '#00f9f9' : '#c7c7c7',
+                  }}
+                  source={
+                    focused
+                      ? require('./assets/compass-active.png')
+                      : require('./assets/compass.png')
+                  }
+                />
+              </View>
+            );
+          },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Dice"
+        component={Dice}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                elevation={24}
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                }}>
+                <Image
+                  resizeMode="contain"
+                  style={{
+                    width: 75,
+                    height: 75,
+                    bottom: 2,
+                    tintColor: focused ? '#00f9f9' : '#c7c7c7',
+                  }}
+                  source={
+                    focused
+                      ? require('./assets/clapperboard-active.png')
+                      : require('./assets/clapperboard.png')
+                  }
+                />
+              </View>
+            );
+          },
+          tabBarButton: props => {
+            return <CustomTabBarButton {...props} />;
+          },
+          headerShown: false,
+        }}
+      />
+      <Tab.Screen
+        name="Fav"
+        component={Fav}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <View
+                elevation={24}
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                }}>
+                <Image
+                  resizeMode="contain"
+                  style={{
+                    width: 40,
+                    height: 40,
+                    bottom: 2,
+                    tintColor: focused ? '#00f9f9' : '#c7c7c7',
+                  }}
+                  source={
+                    focused
+                      ? require('./assets/favourite-active.png')
+                      : require('./assets/favourite.png')
+                  }
+                />
+              </View>
+            );
+          },
+          headerShown: false,
+        }}
+      />
+    </Tab.Navigator>
   );
-}
+};
 
-export {App};
-
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Root">
+        <Stack.Screen
+          name="Root"
+          component={Root}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Details"
+          component={Details}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+export default App;
 const styles = StyleSheet.create({
   shadow: {
     shadowColor: '#000',

@@ -5,7 +5,7 @@ const {width, height} = Dimensions.get('screen');
 const VideoFrame = ({videoKey}) => {
   return (
     <YoutubePlayer
-      height={height / 5}
+      height={height / 3}
       style={{zIndex: 0}}
       // play={playing}
       videoId={videoKey}

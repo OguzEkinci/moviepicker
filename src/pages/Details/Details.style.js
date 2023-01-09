@@ -1,30 +1,29 @@
 import {Dimensions, StyleSheet} from 'react-native';
 const {width, height} = Dimensions.get('screen');
+const HEADER_MAX_HEIGHT = height / 3.5;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'pink',
-    borderRadius: 10,
-    flex: 0.9,
-    paddingTop: 0,
+    flex: 1,
+    backgroundColor: '#323232',
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   mainTitle: {
-    width: 340,
+    width: width - 30,
     textAlign: 'center',
-    color: '#191919',
+    color: '#ddd',
     fontSize: 40,
     fontWeight: 'bold',
   },
   subTitle: {
-    width: 340,
+    width: width - 30,
     textAlign: 'center',
-    color: '#484848',
+    color: '#ddd',
     fontSize: 17,
     marginTop: 8,
   },
   yearAndTimeHeader: {
-    width: 340,
+    width: width - 30,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
@@ -38,17 +37,18 @@ const styles = StyleSheet.create({
   },
   mainText: {
     textAlign: 'center',
-    color: '#484848',
+    color: '#ddd',
     fontSize: 15,
-    width: 340,
+    width: width - 30,
     padding: 4,
   },
   genresView: {
-    width: 340,
+    width: width - 30,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 10,
   },
   genresInsideView: {
     backgroundColor: '#a0587e',
@@ -72,11 +72,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    width: 340,
+    width: width - 30,
     marginTop: 16,
     paddingBottom: 16,
   },
   icon: {
+    tintColor: '#ddd',
     width: 15,
     height: 15,
     marginRight: 3,

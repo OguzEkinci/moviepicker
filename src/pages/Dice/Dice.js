@@ -8,24 +8,20 @@ import {
   Image,
   TextInput,
   ImageBackground,
-  PlatformColor,
   Appearance,
 } from 'react-native';
 import LottieView from 'lottie-react-native';
-import {MovieInfoModal, ErrorModal, Loader} from '../../components';
+import {ErrorModal, Loader} from '../../components';
 import {getFilterMovieDetail} from '../../services/DiceServices/getMovieDetail';
 import SelectDropdown from 'react-native-select-dropdown';
 import {genres, genresWithId} from '../../data/genresData';
 import {isEmpty} from 'lodash';
 import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
-import LinearGradient from 'react-native-linear-gradient';
 
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
   const [loadingVisible, setLoadingVisible] = useState(false);
-  const [randomMovie, setRandomMovie] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
@@ -53,9 +49,11 @@ const Dice = ({navigation}) => {
           !isEmpty(res.data.results) &&
           !isEmpty(res.data?.results[randomNumberFilterMovie]?.poster_path)
         ) {
-          setRandomMovie(res.data.results[randomNumberFilterMovie]);
-          setModalVisible(true);
           setLoadingVisible(false);
+          navigation.navigate(
+            'Details',
+            res.data.results[randomNumberFilterMovie],
+          );
         } else {
           if (counter === 20) {
             //20 kere istek attıktan sonra film bulamadıysa işlemi durduracak
@@ -66,6 +64,7 @@ const Dice = ({navigation}) => {
         }
       })
       .catch(err => {
+        console.log(err);
         setErrorModalVisible(true);
         setLoadingVisible(false);
       });
@@ -257,12 +256,6 @@ const Dice = ({navigation}) => {
           />
         </TouchableOpacity>
         {loadingVisible && <Loader />}
-        <MovieInfoModal
-          modalVisible={modalVisible}
-          setModalVisible={setModalVisible}
-          movieInfo={randomMovie}
-          setMovieInfo={setRandomMovie}
-        />
         <ErrorModal
           errorModalVisible={errorModalVisible}
           setErrorModalVisible={setErrorModalVisible}

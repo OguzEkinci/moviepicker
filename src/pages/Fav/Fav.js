@@ -13,7 +13,7 @@ import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import styles from './Fav.style';
 const {width, height} = Dimensions.get('screen');
 
-const Fav = () => {
+const Fav = ({navigation}) => {
   const favList = useSelector(state => state.favList);
   return (
     <SafeAreaView style={styles.container}>
@@ -32,7 +32,7 @@ const Fav = () => {
           {isArray(favList) &&
             favList?.map((item, index) => (
               <View style={{margin: 5}} key={index}>
-                <DiscoverCard item={item} />
+                <DiscoverCard navigation={navigation} item={item} />
               </View>
             ))}
           <View
@@ -46,4 +46,4 @@ const Fav = () => {
     </SafeAreaView>
   );
 };
-export {Fav};
+export default Fav;

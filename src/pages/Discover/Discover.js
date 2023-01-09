@@ -14,15 +14,17 @@ import {getTopRated} from '../../services/DiscoverServices/getTopRated';
 import {getTrending} from '../../services/DiscoverServices/getTrending';
 import ToggleButton from './components/ToggleButton/ToggleButton';
 import Carousel from 'react-native-snap-carousel';
+import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 const {height} = Dimensions.get('window');
 const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.25);
-const Discover = () => {
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.26);
+const Discover = ({navigation}) => {
   const [popularList, setPopularList] = useState([]);
   const [topRatedList, setTopRatedList] = useState([]);
   const [trendingList, setTrendingList] = useState([]);
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [timeRange, setTimeRange] = useState('day');
+
   useEffect(() => {
     setLoadingVisible(true);
     getPopular()
@@ -49,8 +51,15 @@ const Discover = () => {
       });
   }, []);
 
-  const renderListCard = ({item}) => {
-    return <View></View>;
+  const renderListCard = ({item, key}) => {
+    return (
+      <DiscoverCard
+        navigation={navigation}
+        discover={true}
+        item={item}
+        key={key}
+      />
+    );
   };
 
   const handleToggle = () => {
@@ -93,12 +102,6 @@ const Discover = () => {
                 paddingLeft: 70,
               }}
             />
-            {/* <FlatList
-              data={trendingList}
-              horizontal
-              renderItem={renderListCard}
-              estimatedItemSize={400}
-            /> */}
           </ScrollView>
           <ScrollView>
             <View style={styles.headerView}>
@@ -139,4 +142,4 @@ const Discover = () => {
     </SafeAreaView>
   );
 };
-export {Discover};
+export default Discover;
