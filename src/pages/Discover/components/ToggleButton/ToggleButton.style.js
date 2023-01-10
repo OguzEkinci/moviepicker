@@ -9,11 +9,10 @@ const styles = StyleSheet.create({
   leftButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 45,
-    height: 25,
+    padding: 4,
+    borderTopLeftRadius: 20,
+    borderBottomLeftRadius: 20,
     backgroundColor: '#ff685d',
-    borderTopLeftRadius: 40,
-    borderBottomRightRadius: 40,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -26,11 +25,10 @@ const styles = StyleSheet.create({
   rightButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    width: 45,
-    height: 25,
+    padding: 4,
+    borderTopRightRadius: 20,
+    borderBottomRightRadius: 20,
     backgroundColor: '#ff685d',
-    borderTopLeftRadius: 40,
-    borderBottomRightRadius: 40,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
