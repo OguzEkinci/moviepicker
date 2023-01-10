@@ -1,6 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native';
 const {width, height} = Dimensions.get('screen');
-const HEADER_MAX_HEIGHT = height / 3.5;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
