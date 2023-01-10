@@ -1,7 +1,6 @@
 import {isArray} from 'lodash';
 import React, {useEffect, useReducer, useRef, useState} from 'react';
 import {View, Image, Dimensions, TouchableOpacity, Text} from 'react-native';
-import Animated from 'react-native-reanimated';
 import {getVideo} from '../../services/GetVideo/GetVideo';
 import {styles} from './Details.style';
 import VideoFrame from '../../components/VideoFrame/VideoFrame';
@@ -10,11 +9,9 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {AirbnbRating} from 'react-native-ratings';
 import FavButton from '../../components/Button/FavButton';
 const {width, height} = Dimensions.get('screen');
-
+import I18n from '../../assets/util/lang/_i18n';
 const Details = props => {
   const movieInfo = props.route.params;
-  const scroll = useRef(new Animated.Value(0)).current;
-  const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [videoKey, setVideoKey] = useState('');
   const [state, setState] = useReducer(
     (state, newState) => ({...state, ...newState}),
@@ -23,13 +20,9 @@ const Details = props => {
     },
   );
   useEffect(() => {
-    getVideo(movieInfo?.id)
-      .then(res => {
-        setVideoKey(res.data?.results[0]?.key);
-      })
-      .catch(() => {
-        setErrorModalVisible(true);
-      });
+    getVideo(movieInfo?.id).then(res => {
+      setVideoKey(res.data?.results[0]?.key);
+    });
   }, []);
 
   return (
@@ -128,19 +121,24 @@ const Details = props => {
           }}
         />
       </View>
-      <ScrollView style={{backgroundColor: '#323232', paddingTop: 20}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={{
+          backgroundColor: '#323232',
+          paddingTop: 20,
+        }}>
         {state.watchVideo && <VideoFrame videoKey={videoKey} />}
 
         {movieInfo?.original_title ? (
           <Text style={styles.mainTitle}>{movieInfo?.original_title}</Text>
         ) : (
-          <Text style={styles.mainTitle}>No Title</Text>
+          <Text style={styles.mainTitle}>{I18n.t('noTitle')}</Text>
         )}
 
         {movieInfo?.title ? (
           <Text style={styles.subTitle}>{movieInfo?.title}</Text>
         ) : (
-          <Text style={styles.subTitle}>No Title</Text>
+          <Text style={styles.subTitle}>{I18n.t('noTitle')}</Text>
         )}
         <View style={styles.yearAndTimeHeaderInside}>
           <Image
@@ -175,7 +173,7 @@ const Details = props => {
           }}>
           <View>
             <Text style={styles.mainText}>
-              {movieInfo?.overview ? movieInfo.overview : 'No overview'}
+              {movieInfo?.overview ? movieInfo.overview : I18n.t('noOverview')}
             </Text>
 
             <View style={styles.genresView}>
@@ -211,6 +209,7 @@ const Details = props => {
             <Text style={{color: '#ddd'}}>{movieInfo?.popularity}</Text>
           </View>
         </View>
+        <View style={{height: 50}} />
       </ScrollView>
     </View>
   );
