@@ -28,6 +28,7 @@
     "react": "17.0.2",
     "react-native": "0.68.1",
     "react-native-gesture-handler": "^2.7.1",
+    "react-native-i18n": "^2.0.15",
     "react-native-image-slider-box": "^2.0.7",
     "react-native-imaged-carousel-card": "^0.1.1",
     "react-native-linear-gradient": "2.6.2",
