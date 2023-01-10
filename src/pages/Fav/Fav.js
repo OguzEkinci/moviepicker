@@ -11,6 +11,7 @@ import {
 import {useSelector} from 'react-redux';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import styles from './Fav.style';
+import I18n from '../../assets/util/lang/_i18n';
 const {width, height} = Dimensions.get('screen');
 
 const Fav = ({navigation}) => {
@@ -27,7 +28,7 @@ const Fav = ({navigation}) => {
             flexDirection: 'column',
           }}>
           <View style={styles.headerView}>
-            <Text style={styles.headerText}>SAVED</Text>
+            <Text style={styles.headerText}>{I18n.t('saved')}</Text>
           </View>
           {isArray(favList) &&
             favList?.map((item, index) => (
