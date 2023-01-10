@@ -18,6 +18,7 @@ import {genres, genresWithId} from '../../data/genresData';
 import {isEmpty} from 'lodash';
 import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
+import I18n from '../../assets/util/lang/_i18n';
 
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
@@ -106,10 +107,10 @@ const Dice = ({navigation}) => {
           ref={categoryRef}
           defaultValue={category}
           search
-          searchPlaceHolder={'Search Category'}
+          searchPlaceHolder={I18n.t('searchCategory')}
           searchPlaceHolderColor={'black'}
           data={genres}
-          defaultButtonText={'Select Category'}
+          defaultButtonText={I18n.t('selectCategory')}
           dropdownStyle={{
             backgroundColor: '#323232',
             borderBottomRightRadius: 50,
@@ -137,10 +138,10 @@ const Dice = ({navigation}) => {
           ref={lngRef}
           defaultValue={lng}
           search
-          searchPlaceHolder={'Search Language'}
+          searchPlaceHolder={I18n.t('searchLanguage')}
           searchPlaceHolderColor={'black'}
           data={language}
-          defaultButtonText={'Select Language'}
+          defaultButtonText={I18n.t('selectLanguage')}
           dropdownStyle={{
             backgroundColor: '#323232',
             borderBottomRightRadius: 50,
@@ -187,14 +188,14 @@ const Dice = ({navigation}) => {
                 width: 100,
                 paddingRight: 4,
               }}>
-              Min. Year
+              {I18n.t('minYear')}
             </Text>
             <TextInput
               value={startDate}
               onChangeText={setStartDate}
               keyboardType="number-pad"
               maxLength={4}
-              placeholder="Year"
+              placeholder={I18n.t('year')}
               placeholderTextColor={'#ddd'}
               style={styles.leftInput}
             />
@@ -213,14 +214,14 @@ const Dice = ({navigation}) => {
                 width: 100,
                 paddingLeft: 4,
               }}>
-              Max. Year
+              {I18n.t('maxYear')}
             </Text>
             <TextInput
               value={endDate}
               onChangeText={setEndDate}
               keyboardType="number-pad"
               maxLength={4}
-              placeholder="Year"
+              placeholder={I18n.t('year')}
               placeholderTextColor={'#ddd'}
               style={styles.rightInput}
             />
