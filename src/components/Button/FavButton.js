@@ -56,7 +56,6 @@ const FavButton = ({movieObject}) => {
             ),
           ),
         );
-        setModalVisible(false);
       } catch (e) {
         // error reading value
         console.log(e);
