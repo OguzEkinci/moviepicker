@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import {styles} from './ToggleButton.style';
+import I18n from '../../../../assets/util/lang/_i18n';
 const ToggleButton = ({onPress, timeRange, setTimeRange}) => {
   const leftHandle = () => {
     setTimeRange('day');
@@ -24,11 +25,12 @@ const ToggleButton = ({onPress, timeRange, setTimeRange}) => {
         <Text
           style={{
             color: '#323232',
-            fontSize: 13,
-            paddingBottom: 5,
+            fontSize: 12,
             fontWeight: 'bold',
+            width: 45,
+            textAlign: 'center',
           }}>
-          Day
+          {I18n.t('day')}
         </Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -43,10 +45,11 @@ const ToggleButton = ({onPress, timeRange, setTimeRange}) => {
           style={{
             color: '#323232',
             fontSize: 12,
-            paddingBottom: 2,
+            width: 45,
             fontWeight: 'bold',
+            textAlign: 'center',
           }}>
-          Week
+          {I18n.t('week')}
         </Text>
       </TouchableOpacity>
     </View>
