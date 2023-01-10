@@ -8,13 +8,14 @@ import {
   ImageBackground,
 } from 'react-native';
 import {styles} from './Discover.style';
-import {Loader} from '../../components';
+import {ErrorModal, Loader} from '../../components';
 import {getPopular} from '../../services/DiscoverServices/getPopular';
 import {getTopRated} from '../../services/DiscoverServices/getTopRated';
 import {getTrending} from '../../services/DiscoverServices/getTrending';
 import ToggleButton from './components/ToggleButton/ToggleButton';
 import Carousel from 'react-native-snap-carousel';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
+import I18n from '../../assets/util/lang/_i18n';
 const {height} = Dimensions.get('window');
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.26);
@@ -24,7 +25,7 @@ const Discover = ({navigation}) => {
   const [trendingList, setTrendingList] = useState([]);
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [timeRange, setTimeRange] = useState('day');
-
+  const [errorModalVisible, setErrorModalVisible] = useState(false);
   useEffect(() => {
     setLoadingVisible(true);
     getPopular()
@@ -34,6 +35,7 @@ const Discover = ({navigation}) => {
       })
       .catch(err => {
         setLoadingVisible(false);
+        setErrorModalVisible(true);
       });
     getTopRated()
       .then(res => {
@@ -41,6 +43,7 @@ const Discover = ({navigation}) => {
       })
       .catch(err => {
         setLoadingVisible(false);
+        setErrorModalVisible(true);
       });
     getTrending(timeRange)
       .then(res => {
@@ -48,6 +51,7 @@ const Discover = ({navigation}) => {
       })
       .catch(err => {
         setLoadingVisible(false);
+        setErrorModalVisible(true);
       });
   }, []);
 
@@ -84,7 +88,7 @@ const Discover = ({navigation}) => {
         <ScrollView>
           <ScrollView>
             <View style={styles.headerView}>
-              <Text style={styles.headerText}>TRENDING</Text>
+              <Text style={styles.headerText}>{I18n.t('trending')}</Text>
               <ToggleButton
                 onPress={handleToggle}
                 timeRange={timeRange}
@@ -105,7 +109,7 @@ const Discover = ({navigation}) => {
           </ScrollView>
           <ScrollView>
             <View style={styles.headerView}>
-              <Text style={styles.headerText}>POPULAR</Text>
+              <Text style={styles.headerText}>{I18n.t('popular')}</Text>
             </View>
             <Carousel
               data={popularList}
@@ -121,7 +125,7 @@ const Discover = ({navigation}) => {
           </ScrollView>
           <ScrollView>
             <View style={styles.headerView}>
-              <Text style={styles.headerText}>TOP RATED</Text>
+              <Text style={styles.headerText}>{I18n.t('topRated')}</Text>
             </View>
             <Carousel
               data={topRatedList}
@@ -138,6 +142,10 @@ const Discover = ({navigation}) => {
           <View style={{height: height * 0.14}} />
         </ScrollView>
         {loadingVisible && <Loader />}
+        <ErrorModal
+          errorModalVisible={errorModalVisible}
+          setErrorModalVisible={setErrorModalVisible}
+        />
       </ImageBackground>
     </SafeAreaView>
   );
