@@ -10,8 +10,10 @@ import {AirbnbRating} from 'react-native-ratings';
 import FavButton from '../../components/Button/FavButton';
 const {width, height} = Dimensions.get('screen');
 import I18n from '../../assets/util/lang/_i18n';
+import {FavErrorModal} from '../../components/FavErrorModal/FavErrorModal';
 const Details = props => {
   const movieInfo = props.route.params;
+  const [addingErrorModalVisible, setAddingErrorModalVisible] = useState(false);
   const [videoKey, setVideoKey] = useState('');
   const [state, setState] = useReducer(
     (state, newState) => ({...state, ...newState}),
@@ -64,7 +66,10 @@ const Details = props => {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <FavButton movieObject={movieInfo} />
+            <FavButton
+              movieObject={movieInfo}
+              setModalVisible={setAddingErrorModalVisible}
+            />
           </View>
         </View>
 
@@ -210,6 +215,10 @@ const Details = props => {
           </View>
         </View>
         <View style={{height: 50}} />
+        <FavErrorModal
+          setModalVisible={setAddingErrorModalVisible}
+          modalVisible={addingErrorModalVisible}
+        />
       </ScrollView>
     </View>
   );
