@@ -1,5 +1,5 @@
 import {isArray} from 'lodash';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Dimensions,
   SafeAreaView,
@@ -12,10 +12,12 @@ import {useSelector} from 'react-redux';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import styles from './Fav.style';
 import I18n from '../../assets/util/lang/_i18n';
+import {FavErrorModal} from '../../components/FavErrorModal/FavErrorModal';
 const {width, height} = Dimensions.get('screen');
 
 const Fav = ({navigation}) => {
   const favList = useSelector(state => state.favList);
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -29,6 +31,18 @@ const Fav = ({navigation}) => {
           }}>
           <View style={styles.headerView}>
             <Text style={styles.headerText}>{I18n.t('saved')}</Text>
+            <Text
+              style={[
+                styles.headerText,
+                {
+                  borderTopLeftRadius: 20,
+                  borderBottomLeftRadius: 20,
+                  borderTopRightRadius: 0,
+                  borderBottomRightRadius: 0,
+                },
+              ]}>
+              {favList.length}/100
+            </Text>
           </View>
           {isArray(favList) &&
             favList?.map((item, index) => (
