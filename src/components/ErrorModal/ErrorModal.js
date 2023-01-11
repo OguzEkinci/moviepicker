@@ -11,7 +11,7 @@ const ErrorModal = props => {
         animationIn={'tada'}
         isVisible={errorModalVisible}
         swipeDirection={'down'}
-        style={{margin: 0}}
+        style={{margin: 0, justifyContent: 'center', alignItems: 'center'}}
         onBackdropPress={() => {
           setErrorModalVisible(false);
         }}
