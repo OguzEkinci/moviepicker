@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Image, TouchableOpacity, View} from 'react-native';
+import {Alert, Image, TouchableOpacity, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setFavList} from '../../redux/fav-list/action';
 import {styles} from './FavButton.style';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const FavButton = ({movieObject}) => {
+const FavButton = ({movieObject, setModalVisible}) => {
   const [addedFav, setAddedFav] = useState(false);
   const dispatch = useDispatch();
+  const favList = useSelector(state => state.favList);
   useEffect(() => {
     const getItem = async () => {
       try {
@@ -22,19 +23,25 @@ const FavButton = ({movieObject}) => {
   const handlePress = async () => {
     setAddedFav(!addedFav);
     if (!addedFav) {
-      //add item
-      try {
-        const value = await AsyncStorage.getItem('@FavList');
-        let parsedValue = JSON.parse(value);
-        if (parsedValue === null) {
-          parsedValue = [movieObject];
-        } else {
-          parsedValue.push(movieObject);
+      if (favList.length !== 100) {
+        //listeye 100 taneden fazla film kaydetmemeyi sağlar
+        //add item
+        try {
+          const value = await AsyncStorage.getItem('@FavList');
+          let parsedValue = JSON.parse(value);
+          if (parsedValue === null) {
+            parsedValue = [movieObject];
+          } else {
+            parsedValue.push(movieObject);
+          }
+          await AsyncStorage.setItem('@FavList', JSON.stringify(parsedValue));
+          dispatch(setFavList(parsedValue));
+        } catch (e) {
+          console.log(e);
         }
-        await AsyncStorage.setItem('@FavList', JSON.stringify(parsedValue));
-        dispatch(setFavList(parsedValue));
-      } catch (e) {
-        console.log(e);
+      } else {
+        setModalVisible(true);
+        setAddedFav(false);
       }
     } else {
       //remove item
