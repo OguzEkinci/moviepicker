@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Fav from './pages/Fav/Fav';
@@ -10,6 +10,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {setFavList} from './redux/fav-list/action';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import SplashScreen from './pages/SplashScreen/SplashScreen';
+import {isArray} from 'lodash';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const CustomTabBarButton = ({children, onPress}) => {
@@ -33,7 +35,7 @@ const Root = () => {
     const getItem = async () => {
       try {
         const favList = await AsyncStorage.getItem('@FavList');
-        const parsedValue = JSON.parse(favList);
+        const parsedValue = isArray(favList) ? JSON.parse(favList) : [];
         dispatch(setFavList(parsedValue));
         console.log(parsedValue);
       } catch (e) {
@@ -167,9 +169,27 @@ const Root = () => {
 };
 
 const App = () => {
+  const [showSplashScreen, setShowSplashScreen] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSplashScreen(false);
+    }, 4000);
+  }, []);
+  const forFade = ({current}) => ({
+    cardStyle: {
+      opacity: current.progress,
+    },
+  });
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Root">
+      <Stack.Navigator>
+        {showSplashScreen && (
+          <Stack.Screen
+            name="SplashScreen"
+            component={SplashScreen}
+            options={{headerShown: false, cardStyleInterpolator: forFade}}
+          />
+        )}
         <Stack.Screen
           name="Root"
           component={Root}
