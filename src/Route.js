@@ -5,7 +5,7 @@ import Fav from './pages/Fav/Fav';
 import {Dice} from './pages/Dice/index';
 import Details from './pages/Details/Details';
 import Discover from './pages/Discover/Discover';
-import {View, StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
+import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useDispatch} from 'react-redux';
 import {setFavList} from './redux/fav-list/action';
@@ -20,7 +20,6 @@ const CustomTabBarButton = ({children, onPress}) => {
         justifyContent: 'center',
         alignItems: 'center',
         top: -23,
-        ...styles.shadow,
       }}
       onPress={onPress}>
       <View style={{width: 75, height: 75}}>{children}</View>
@@ -37,13 +36,10 @@ const Root = () => {
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
-          elevation: 0,
-          backgroundColor: '#323232',
+          backgroundColor: 'rgba(50,50,50,0.8)',
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50,
           height: 90,
-          opacity: 0.8,
-          ...styles.shadow,
         },
       }}>
       <Tab.Screen
@@ -53,11 +49,20 @@ const Root = () => {
           tabBarIcon: ({focused}) => {
             return (
               <View
-                elevation={24}
                 style={{
+                  backgroundColor: 'rgba(50,50,50,0.0)',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                  width: 20,
+                  height: 20,
+                  shadowColor: focused ? '#00f9f9' : 'rgba(50,50,50,0.0)',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 1,
+                  shadowRadius: 1,
+                  elevation: 24,
                 }}>
                 <Image
                   resizeMode="contain"
@@ -86,11 +91,20 @@ const Root = () => {
           tabBarIcon: ({focused}) => {
             return (
               <View
-                elevation={24}
                 style={{
+                  backgroundColor: 'rgba(50,50,50,0.0)',
+                  width: 50,
+                  height: 50,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                  shadowColor: focused ? '#00f9f9' : 'rgba(50,50,50,0.0)',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 1,
+                  shadowRadius: 1,
+                  elevation: 24,
                 }}>
                 <Image
                   resizeMode="contain"
@@ -122,11 +136,20 @@ const Root = () => {
           tabBarIcon: ({focused}) => {
             return (
               <View
-                elevation={24}
                 style={{
+                  width: 25,
+                  height: 25,
+                  backgroundColor: 'rgba(50,50,50,0)',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  shadowColor: focused ? '#00f9f9' : '#c7c7c7',
+                  shadowColor: focused ? '#00f9f9' : 'rgba(50,50,50,0.0)',
+                  shadowOffset: {
+                    width: 0,
+                    height: 12,
+                  },
+                  shadowOpacity: 1,
+                  shadowRadius: 1,
+                  elevation: 24,
                 }}>
                 <Image
                   resizeMode="contain"
