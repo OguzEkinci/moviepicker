@@ -12,12 +12,11 @@ import {useSelector} from 'react-redux';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import styles from './Fav.style';
 import I18n from '../../assets/util/lang/_i18n';
-import {FavErrorModal} from '../../components/FavErrorModal/FavErrorModal';
 const {width, height} = Dimensions.get('screen');
 
 const Fav = ({navigation}) => {
   const favList = useSelector(state => state.favList);
-
+  console.log(favList);
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -41,7 +40,7 @@ const Fav = ({navigation}) => {
                   borderBottomRightRadius: 0,
                 },
               ]}>
-              {favList.length}/100
+              {isArray(favList) ? favList.length : 0} /100
             </Text>
           </View>
           {isArray(favList) &&
