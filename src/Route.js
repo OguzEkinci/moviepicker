@@ -11,7 +11,6 @@ import {useDispatch} from 'react-redux';
 import {setFavList} from './redux/fav-list/action';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import SplashScreen from './pages/SplashScreen/SplashScreen';
-import {isArray} from 'lodash';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 const CustomTabBarButton = ({children, onPress}) => {
@@ -30,21 +29,6 @@ const CustomTabBarButton = ({children, onPress}) => {
 };
 
 const Root = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const getItem = async () => {
-      try {
-        const favList = await AsyncStorage.getItem('@FavList');
-        const parsedValue = isArray(favList) ? JSON.parse(favList) : [];
-        dispatch(setFavList(parsedValue));
-        console.log(parsedValue);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    getItem();
-  }, []);
-
   return (
     <Tab.Navigator
       initialRouteName="Dice"
@@ -169,6 +153,7 @@ const Root = () => {
 };
 
 const App = () => {
+  /* SplashScreen */
   const [showSplashScreen, setShowSplashScreen] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -180,6 +165,23 @@ const App = () => {
       opacity: current.progress,
     },
   });
+
+  /* AsyncStorage get item */
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const getItem = async () => {
+      try {
+        const favList = await AsyncStorage.getItem('@FavList');
+        const parsedValue = JSON.parse(favList);
+        dispatch(setFavList(parsedValue));
+        console.log(parsedValue);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getItem();
+  }, []);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
