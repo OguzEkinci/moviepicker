@@ -13,9 +13,9 @@ import {getPopular} from '../../services/DiscoverServices/getPopular';
 import {getTopRated} from '../../services/DiscoverServices/getTopRated';
 import {getTrending} from '../../services/DiscoverServices/getTrending';
 import ToggleButton from './components/ToggleButton/ToggleButton';
-import Carousel from 'react-native-snap-carousel';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import I18n from '../../assets/util/lang/_i18n';
+import Carousel from '../../components/react-native-snap-carousel/src/index';
 const {height} = Dimensions.get('window');
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.26);
@@ -28,6 +28,7 @@ const Discover = ({navigation}) => {
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   useEffect(() => {
     setLoadingVisible(true);
+
     getPopular()
       .then(res => {
         setLoadingVisible(false);
@@ -65,7 +66,6 @@ const Discover = ({navigation}) => {
       />
     );
   };
-
   const handleToggle = () => {
     getTrending(timeRange)
       .then(res => {
@@ -101,7 +101,7 @@ const Discover = ({navigation}) => {
               sliderWidth={SLIDER_WIDTH}
               itemWidth={ITEM_WIDTH}
               layout={'stack'}
-              layoutCardOffset={`18`}
+              layoutCardOffset={18}
               contentContainerCustomStyle={{
                 paddingLeft: 70,
               }}
@@ -117,7 +117,7 @@ const Discover = ({navigation}) => {
               sliderWidth={SLIDER_WIDTH}
               itemWidth={ITEM_WIDTH}
               layout={'stack'}
-              layoutCardOffset={`18`}
+              layoutCardOffset={18}
               contentContainerCustomStyle={{
                 paddingLeft: 70,
               }}
@@ -133,7 +133,7 @@ const Discover = ({navigation}) => {
               sliderWidth={SLIDER_WIDTH}
               itemWidth={ITEM_WIDTH}
               layout={'stack'}
-              layoutCardOffset={`18`}
+              layoutCardOffset={18}
               contentContainerCustomStyle={{
                 paddingLeft: 70,
               }}
