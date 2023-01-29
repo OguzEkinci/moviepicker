@@ -75,10 +75,18 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   filterButton: {
-    width: 75,
-    height: 75,
+    borderRadius: 100,
+    backgroundColor: 'rgba(50,50,50,0)',
     justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 1,
+    elevation: 24,
   },
 });
 export {styles};
