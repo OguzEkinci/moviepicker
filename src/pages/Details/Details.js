@@ -183,7 +183,7 @@ const Details = props => {
 
             <View style={styles.genresView}>
               {isArray(movieInfo?.genre_ids) &&
-                movieInfo?.genre_ids.map((genre_id, ind) =>
+                movieInfo?.genre_ids.map((genre_id, _ind) =>
                   genresWithId.map(
                     (genres, index) =>
                       genres?.id === genre_id && (
