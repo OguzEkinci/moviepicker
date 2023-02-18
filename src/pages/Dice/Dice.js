@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -19,6 +19,7 @@ import {isEmpty} from 'lodash';
 import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
 import I18n from '../../assets/util/lang/_i18n';
+import {getMovieDetail} from '../../services/DiceServices/getMovieAllDetails';
 
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
@@ -51,10 +52,16 @@ const Dice = ({navigation}) => {
           !isEmpty(res.data?.results[randomNumberFilterMovie]?.poster_path)
         ) {
           setLoadingVisible(false);
-          navigation.navigate(
-            'Details',
-            res.data.results[randomNumberFilterMovie],
-          );
+          //discover apisi kapsamlı bir liste, oradan movie id'sini alıp detail apisine istek atıyoruz
+          getMovieDetail(res.data.results[randomNumberFilterMovie]?.id)
+            .then(res => {
+              navigation.navigate('Details', res.data);
+            })
+            .catch(err => {
+              setErrorModalVisible(true);
+              setLoadingVisible(false);
+            });
+          /*  */
         } else {
           if (counter === 20) {
             //20 kere istek attıktan sonra film bulamadıysa işlemi durduracak
@@ -65,7 +72,6 @@ const Dice = ({navigation}) => {
         }
       })
       .catch(err => {
-        console.log(err);
         setErrorModalVisible(true);
         setLoadingVisible(false);
       });
