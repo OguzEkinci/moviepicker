@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 8,
     marginBottom: 8,
+    marginLeft: 8,
   },
   mainText: {
     textAlign: 'center',
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   icon: {
-    tintColor: '#ddd',
+    tintColor: '#a0587e',
     width: 15,
     height: 15,
     marginRight: 3,
