@@ -26,7 +26,14 @@ const Details = props => {
       setVideoKey(res.data?.results[0]?.key);
     });
   }, []);
-
+  const timeConvert = n => {
+    let num = n;
+    let hours = num / 60;
+    let rhours = Math.floor(hours);
+    let minutes = (hours - rhours) * 60;
+    let rminutes = Math.round(minutes);
+    return rhours + ' hour(s) ' + rminutes + ' minute(s).';
+  };
   return (
     <View style={styles.container}>
       <View style={{position: 'relative'}}>
@@ -158,7 +165,29 @@ const Details = props => {
           <Text style={{color: '#ddd'}}>
             {movieInfo?.release_date ? movieInfo?.release_date : '-/-/-'}
           </Text>
+          {movieInfo?.runtime ? (
+            <View style={styles.yearAndTimeHeaderInside}>
+              <Image
+                style={styles.icon}
+                resizeMode={'center'}
+                source={require('../../assets/sand-clock.png')}
+              />
+              <Text style={{color: '#ddd'}}>
+                {timeConvert(movieInfo?.runtime)}
+              </Text>
+            </View>
+          ) : (
+            <View style={styles.yearAndTimeHeaderInside}>
+              <Image
+                style={styles.icon}
+                resizeMode={'center'}
+                source={require('../../assets/sand-clock.png')}
+              />
+              <Text style={{color: '#ddd'}}>No runtime info</Text>
+            </View>
+          )}
         </View>
+
         <AirbnbRating
           count={10}
           reviews={['']}
@@ -182,7 +211,7 @@ const Details = props => {
             </Text>
 
             <View style={styles.genresView}>
-              {isArray(movieInfo?.genre_ids) &&
+              {/* {isArray(movieInfo?.genre_ids) &&
                 movieInfo?.genre_ids.map((genre_id, _ind) =>
                   genresWithId.map(
                     (genres, index) =>
@@ -194,7 +223,12 @@ const Details = props => {
                         </View>
                       ),
                   ),
-                )}
+                )} */}
+              {movieInfo?.genres?.map((item, index) => (
+                <View key={index} style={styles.genresInsideView}>
+                  <Text style={styles.genresText}>{item?.name.toString()}</Text>
+                </View>
+              ))}
             </View>
           </View>
         </View>
@@ -213,6 +247,19 @@ const Details = props => {
             />
             <Text style={{color: '#ddd'}}>{movieInfo?.popularity}</Text>
           </View>
+          {movieInfo.spoken_languages &&
+            movieInfo.spoken_languages.map((item, index) => {
+              return (
+                <View key={index} style={{flexDirection: 'row'}}>
+                  <Image
+                    source={require('../../assets/language.png')}
+                    resizeMode="center"
+                    style={styles.icon}
+                  />
+                  <Text style={{color: '#ddd'}}>{item.english_name}</Text>
+                </View>
+              );
+            })}
         </View>
         <View style={{height: 50}} />
         <FavErrorModal
