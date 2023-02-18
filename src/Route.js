@@ -196,8 +196,7 @@ const App = () => {
       try {
         const favList = await AsyncStorage.getItem('@FavList');
         const parsedValue = JSON.parse(favList);
-        dispatch(setFavList(parsedValue));
-        console.log(parsedValue);
+        dispatch(setFavList(parsedValue ?? []));
       } catch (e) {
         console.log(e);
       }
