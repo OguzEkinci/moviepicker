@@ -32,7 +32,9 @@ const Details = props => {
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
     let rminutes = Math.round(minutes);
-    return rhours + I18n.t('hour') + rminutes + I18n.t('minute');
+    return (
+      rhours + ' ' + I18n.t('hour') + ' ' + rminutes + ' ' + I18n.t('minute')
+    );
   };
   return (
     <View style={styles.container}>
@@ -226,6 +228,7 @@ const Details = props => {
               justifyContent: 'center',
               alignItems: 'center',
               flexDirection: 'row',
+              marginBottom: 5,
             }}>
             <Image
               source={require('../../assets/popularity.png')}
@@ -234,19 +237,35 @@ const Details = props => {
             />
             <Text style={{color: '#ddd'}}>{movieInfo?.popularity}</Text>
           </View>
-          {movieInfo.spoken_languages &&
-            movieInfo.spoken_languages.map((item, index) => {
-              return (
-                <View key={index} style={{flexDirection: 'row'}}>
-                  <Image
-                    source={require('../../assets/language.png')}
-                    resizeMode="center"
-                    style={styles.icon}
-                  />
-                  <Text style={{color: '#ddd'}}>{item.english_name}</Text>
-                </View>
-              );
-            })}
+          <View
+            style={{
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+            }}>
+            {movieInfo.spoken_languages &&
+              movieInfo.spoken_languages.map((item, index) => {
+                return (
+                  <View
+                    key={index}
+                    style={{
+                      flexDirection: 'row',
+                      marginLeft: 7,
+                      marginRight: 7,
+                    }}>
+                    <Image
+                      source={require('../../assets/language.png')}
+                      resizeMode="center"
+                      style={styles.icon}
+                    />
+                    <Text style={{color: '#ddd'}}>
+                      {I18n.t(`${item.english_name}`)}
+                    </Text>
+                  </View>
+                );
+              })}
+          </View>
         </View>
         <View style={{height: 50}} />
         <FavErrorModal
