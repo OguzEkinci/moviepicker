@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   },
   otherInfoView: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-evenly',
     alignItems: 'center',
     width: width - 30,
