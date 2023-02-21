@@ -32,7 +32,7 @@ const Details = props => {
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
     let rminutes = Math.round(minutes);
-    return rhours + ' hour(s) ' + rminutes + ' minute(s).';
+    return rhours + I18n.t('hour') + rminutes + I18n.t('minute');
   };
   return (
     <View style={styles.container}>
@@ -183,7 +183,7 @@ const Details = props => {
                 resizeMode={'center'}
                 source={require('../../assets/sand-clock.png')}
               />
-              <Text style={{color: '#ddd'}}>No runtime info</Text>
+              <Text style={{color: '#ddd'}}>{I18n.t('noRuntime')}</Text>
             </View>
           )}
         </View>
@@ -211,19 +211,6 @@ const Details = props => {
             </Text>
 
             <View style={styles.genresView}>
-              {/* {isArray(movieInfo?.genre_ids) &&
-                movieInfo?.genre_ids.map((genre_id, _ind) =>
-                  genresWithId.map(
-                    (genres, index) =>
-                      genres?.id === genre_id && (
-                        <View key={index} style={styles.genresInsideView}>
-                          <Text style={styles.genresText}>
-                            {genres?.name.toString()}
-                          </Text>
-                        </View>
-                      ),
-                  ),
-                )} */}
               {movieInfo?.genres?.map((item, index) => (
                 <View key={index} style={styles.genresInsideView}>
                   <Text style={styles.genresText}>{item?.name.toString()}</Text>
