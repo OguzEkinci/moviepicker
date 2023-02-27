@@ -12,7 +12,8 @@ const {width, height} = Dimensions.get('screen');
 import I18n from '../../assets/util/lang/_i18n';
 import {FavErrorModal} from '../../components/FavErrorModal/FavErrorModal';
 const Details = props => {
-  const movieInfo = props.route.params;
+  const {movieInfo, isDicePage} = props.route.params;
+  console.log(movieInfo, isDicePage);
   const [addingErrorModalVisible, setAddingErrorModalVisible] = useState(false);
   const [videoKey, setVideoKey] = useState('');
   const [state, setState] = useReducer(
@@ -167,27 +168,28 @@ const Details = props => {
           <Text style={{color: '#ddd'}}>
             {movieInfo?.release_date ? movieInfo?.release_date : '-/-/-'}
           </Text>
-          {movieInfo?.runtime ? (
-            <View style={styles.yearAndTimeHeaderInside}>
-              <Image
-                style={styles.icon}
-                resizeMode={'center'}
-                source={require('../../assets/sand-clock.png')}
-              />
-              <Text style={{color: '#ddd'}}>
-                {timeConvert(movieInfo?.runtime)}
-              </Text>
-            </View>
-          ) : (
-            <View style={styles.yearAndTimeHeaderInside}>
-              <Image
-                style={styles.icon}
-                resizeMode={'center'}
-                source={require('../../assets/sand-clock.png')}
-              />
-              <Text style={{color: '#ddd'}}>{I18n.t('noRuntime')}</Text>
-            </View>
-          )}
+          {isDicePage &&
+            (movieInfo?.runtime ? (
+              <View style={styles.yearAndTimeHeaderInside}>
+                <Image
+                  style={styles.icon}
+                  resizeMode={'center'}
+                  source={require('../../assets/sand-clock.png')}
+                />
+                <Text style={{color: '#ddd'}}>
+                  {timeConvert(movieInfo?.runtime)}
+                </Text>
+              </View>
+            ) : (
+              <View style={styles.yearAndTimeHeaderInside}>
+                <Image
+                  style={styles.icon}
+                  resizeMode={'center'}
+                  source={require('../../assets/sand-clock.png')}
+                />
+                <Text style={{color: '#ddd'}}>{I18n.t('noRuntime')}</Text>
+              </View>
+            ))}
         </View>
 
         <AirbnbRating
@@ -237,35 +239,37 @@ const Details = props => {
             />
             <Text style={{color: '#ddd'}}>{movieInfo?.popularity}</Text>
           </View>
-          <View
-            style={{
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-            }}>
-            {movieInfo.spoken_languages &&
-              movieInfo.spoken_languages.map((item, index) => {
-                return (
-                  <View
-                    key={index}
-                    style={{
-                      flexDirection: 'row',
-                      marginLeft: 7,
-                      marginRight: 7,
-                    }}>
-                    <Image
-                      source={require('../../assets/language.png')}
-                      resizeMode="center"
-                      style={styles.icon}
-                    />
-                    <Text style={{color: '#ddd'}}>
-                      {I18n.t(`${item.english_name}`)}
-                    </Text>
-                  </View>
-                );
-              })}
-          </View>
+          {isDicePage && (
+            <View
+              style={{
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}>
+              {movieInfo.spoken_languages &&
+                movieInfo.spoken_languages.map((item, index) => {
+                  return (
+                    <View
+                      key={index}
+                      style={{
+                        flexDirection: 'row',
+                        marginLeft: 7,
+                        marginRight: 7,
+                      }}>
+                      <Image
+                        source={require('../../assets/language.png')}
+                        resizeMode="center"
+                        style={styles.icon}
+                      />
+                      <Text style={{color: '#ddd'}}>
+                        {I18n.t(`${item.english_name}`)}
+                      </Text>
+                    </View>
+                  );
+                })}
+            </View>
+          )}
         </View>
         <View style={{height: 50}} />
         <FavErrorModal
