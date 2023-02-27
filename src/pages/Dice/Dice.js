@@ -55,7 +55,10 @@ const Dice = ({navigation}) => {
           //discover apisi kapsamlı bir liste, oradan movie id'sini alıp detail apisine istek atıyoruz
           getMovieDetail(res.data.results[randomNumberFilterMovie]?.id)
             .then(res => {
-              navigation.navigate('Details', res.data);
+              navigation.navigate('Details', {
+                movieInfo: res.data,
+                isDicePage: true,
+              });
             })
             .catch(err => {
               setErrorModalVisible(true);
