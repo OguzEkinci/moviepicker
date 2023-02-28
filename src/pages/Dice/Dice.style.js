@@ -21,22 +21,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.58,
     shadowRadius: 16.0,
     elevation: 24,
-  },
-  topDropdown: {
-    marginTop: 20,
-    backgroundColor: '#323232',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 12,
-    },
-    shadowOpacity: 0.58,
-    shadowRadius: 16.0,
-    elevation: 24,
+    width: width - 170,
+    height: 55,
   },
   leftInput: {
     padding: 8,
@@ -87,6 +73,34 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     shadowRadius: 1,
     elevation: 24,
+  },
+  //dropwdown
+  dropdownContainer: {
+    width: width - 100,
+  },
+  dropdown: {
+    height: 55,
+    marginTop: 10,
+    backgroundColor: '#323232',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    borderBottomLeftRadius: 50,
+    borderBottomRightRadius: 50,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+    color: '#c7c7c7',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  selectedTextStyle: {
+    fontSize: 14,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  selectedStyle: {
+    borderRadius: 12,
+    backgroundColor: '#00f9f9',
   },
 });
 export {styles};
