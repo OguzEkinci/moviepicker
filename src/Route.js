@@ -39,7 +39,7 @@ const Root = () => {
           backgroundColor: 'rgba(50,50,50,0.8)',
           borderTopLeftRadius: 50,
           borderTopRightRadius: 50,
-          height: 90,
+          height: 75,
         },
       }}>
       <Tab.Screen
