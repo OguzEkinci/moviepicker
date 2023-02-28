@@ -20,14 +20,15 @@ import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
 import I18n from '../../assets/util/lang/_i18n';
 import {getMovieDetail} from '../../services/DiceServices/getMovieAllDetails';
-
+import {MultiSelect} from 'react-native-element-dropdown';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState([]);
   const [lng, setLanguage] = useState('');
   const lngRef = useRef(null);
   const categoryRef = useRef(null);
@@ -86,7 +87,7 @@ const Dice = ({navigation}) => {
       item.name === categoryName && setCategory(item.id);
     });
   };
-
+  console.log(category);
   const _setLanguage = language => {
     languageWithInfo.forEach(item => {
       item.english_name === language && setLanguage(item.iso_639_1);
@@ -96,7 +97,7 @@ const Dice = ({navigation}) => {
   const _clearFilter = () => {
     setStartDate('');
     setEndDate('');
-    setCategory('');
+    setCategory([]);
     setLanguage('');
     lngRef.current?.reset();
     categoryRef.current?.reset();
@@ -112,7 +113,7 @@ const Dice = ({navigation}) => {
           alignItems: 'center',
         }}
         source={require('../../assets/background.jpg')}>
-        <SelectDropdown
+        {/* <SelectDropdown
           ref={categoryRef}
           defaultValue={category}
           search
@@ -142,7 +143,35 @@ const Dice = ({navigation}) => {
             // if data array is an array of objects then return item.property to represent item in dropdown
             return item;
           }}
-        />
+        /> */}
+        <View style={styles.dropdownContainer}>
+          <MultiSelect
+            style={styles.dropdown}
+            placeholderStyle={styles.placeholderStyle}
+            selectedTextStyle={styles.selectedTextStyle}
+            selectedStyle={styles.selectedStyle}
+            containerStyle={{
+              backgroundColor: '#323232',
+              borderBottomRightRadius: 50,
+              borderBottomLeftRadius: 50,
+              borderWidth: 0,
+            }}
+            activeColor={'#123536'}
+            maxSelect={5}
+            itemTextStyle={{color: 'white'}}
+            data={genresWithId}
+            labelField="name"
+            valueField="id"
+            placeholder={I18n.t('selectCategory')}
+            value={category}
+            renderRightIcon={() => {
+              <View />;
+            }}
+            onChange={item => {
+              setCategory(item);
+            }}
+          />
+        </View>
         <SelectDropdown
           ref={lngRef}
           defaultValue={lng}
@@ -245,7 +274,7 @@ const Dice = ({navigation}) => {
               width: 50,
               height: 50,
               tintColor:
-                Appearance.getColorScheme() === 'dark' ? 'gray' : '#323232',
+                Appearance.getColorScheme() === 'dark' ? 'gray' : '#123536',
             }}
             resizeMode={'contain'}
           />
@@ -253,13 +282,13 @@ const Dice = ({navigation}) => {
         <TouchableOpacity
           style={{
             width: width,
-            height: 300,
+            height: 200,
             justifyContent: 'center',
             alignItems: 'center',
           }}
           onPress={() => _getMovie()}>
           <LottieView
-            style={{height: 200}}
+            style={{height: 150}}
             source={require('../../animations/5884-video-movie.json')}
             autoPlay
             loop
