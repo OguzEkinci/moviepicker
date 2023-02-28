@@ -18,7 +18,7 @@ export const getFilterMovieDetail = (
       page: id,
       'primary_release_date.gte': startDate,
       'primary_release_date.lte': endDate,
-      with_genres: category.toString(),
+      with_genres: category.join(','),
       with_original_language: language.toString(),
     },
   });
