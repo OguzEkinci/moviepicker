@@ -258,7 +258,7 @@ const Dice = ({navigation}) => {
               width: 50,
               height: 50,
               tintColor:
-                Appearance.getColorScheme() === 'dark' ? 'gray' : '#123536',
+                Appearance.getColorScheme() === 'dark' ? '#00f9f9' : '#123536',
             }}
             resizeMode={'contain'}
           />
