@@ -70,20 +70,7 @@ const FavButton = ({movieObject, setModalVisible}) => {
     }
   };
   return (
-    <TouchableOpacity
-      style={{
-        width: 45,
-        height: 45,
-        shadowColor: 'black',
-        shadowOffset: {
-          width: 0,
-          height: 12,
-        },
-        shadowOpacity: 0.58,
-        shadowRadius: 16.0,
-        elevation: 24,
-      }}
-      onPress={handlePress}>
+    <TouchableOpacity style={styles.touchable} onPress={handlePress}>
       <Image
         style={styles.image}
         source={
