@@ -40,7 +40,7 @@ const Fav = ({navigation}) => {
                 borderBottomRightRadius: 0,
               },
             ]}>
-            {isArray(favList) ? favList.length : 0} /100
+            {isArray(favList) ? favList.length : 0} /50
           </Text>
         </View>
         <FlatList
