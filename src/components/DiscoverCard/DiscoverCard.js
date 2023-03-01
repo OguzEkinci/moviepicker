@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, TouchableWithoutFeedback, Image, Text} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import {AirbnbRating, Rating} from 'react-native-ratings';
 
 import {styles} from './DiscoverCard.style';
@@ -32,8 +33,7 @@ const DiscoverCard = ({item, key, discover, navigation}) => {
                     alignItems: 'center',
                   }
             }>
-            <Image
-              resizeMode="stretch"
+            <FastImage
               style={{
                 width: discover ? 130 : 110,
                 height: discover ? 180 : 160,
@@ -41,7 +41,9 @@ const DiscoverCard = ({item, key, discover, navigation}) => {
               }}
               source={{
                 uri: `https://image.tmdb.org/t/p/w500/${item?.poster_path}`,
+                priority: FastImage.priority.high,
               }}
+              resizeMode={FastImage.resizeMode.stretch}
             />
           </View>
           {!discover && (
