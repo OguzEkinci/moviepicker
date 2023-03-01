@@ -23,8 +23,8 @@ const FavButton = ({movieObject, setModalVisible}) => {
   const handlePress = async () => {
     setAddedFav(!addedFav);
     if (!addedFav) {
-      if (favList.length !== 100) {
-        //listeye 100 taneden fazla film kaydetmemeyi sağlar
+      if (favList.length !== 50) {
+        //listeye 50 taneden fazla film kaydetmemeyi sağlar
         //add item
         try {
           const value = await AsyncStorage.getItem('@FavList');
