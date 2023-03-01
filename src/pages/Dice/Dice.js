@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   SafeAreaView,
   Text,
@@ -14,15 +14,15 @@ import LottieView from 'lottie-react-native';
 import {ErrorModal, Loader} from '../../components';
 import {getFilterMovieDetail} from '../../services/DiceServices/getMovieDetail';
 import SelectDropdown from 'react-native-select-dropdown';
-import {genres, genresWithId} from '../../data/genresData';
+import {genresWithId} from '../../data/genresData';
 import {isEmpty} from 'lodash';
 import {language, languageWithInfo} from '../../data/language';
 import {styles} from './Dice.style';
 import I18n from '../../assets/util/lang/_i18n';
 import {getMovieDetail} from '../../services/DiceServices/getMovieAllDetails';
 import {MultiSelect} from 'react-native-element-dropdown';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-const {width, height} = Dimensions.get('window');
+
+const {width} = Dimensions.get('window');
 const Dice = ({navigation}) => {
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
@@ -31,8 +31,7 @@ const Dice = ({navigation}) => {
   const [category, setCategory] = useState([]);
   const [lng, setLanguage] = useState('');
   const lngRef = useRef(null);
-  const categoryRef = useRef(null);
-
+  const [dropdownRadiusVis, setDropdownRadiusVis] = useState(true);
   let counter = 0;
   const _getMovie = async () => {
     setLoadingVisible(true);
@@ -87,7 +86,6 @@ const Dice = ({navigation}) => {
       item.name === categoryName && setCategory(item.id);
     });
   };
-  console.log(category);
   const _setLanguage = language => {
     languageWithInfo.forEach(item => {
       item.english_name === language && setLanguage(item.iso_639_1);
@@ -100,7 +98,6 @@ const Dice = ({navigation}) => {
     setCategory([]);
     setLanguage('');
     lngRef.current?.reset();
-    categoryRef.current?.reset();
   };
 
   return (
@@ -113,44 +110,29 @@ const Dice = ({navigation}) => {
           alignItems: 'center',
         }}
         source={require('../../assets/background.jpg')}>
-        {/* <SelectDropdown
-          ref={categoryRef}
-          defaultValue={category}
-          search
-          searchPlaceHolder={I18n.t('searchCategory')}
-          searchPlaceHolderColor={'black'}
-          data={genres}
-          defaultButtonText={I18n.t('selectCategory')}
-          dropdownStyle={{
-            backgroundColor: '#323232',
-            borderBottomRightRadius: 50,
-            borderBottomLeftRadius: 50,
-          }}
-          rowTextStyle={{color: 'white'}}
-          searchInputStyle={{backgroundColor: '#c7c7c7'}}
-          buttonTextStyle={{color: '#c7c7c7', fontWeight: 'bold'}}
-          onSelect={(selectedItem, index) => {
-            _setCategoryId(selectedItem);
-          }}
-          buttonStyle={styles.topDropdown}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
-            return item;
-          }}
-        /> */}
         <View style={styles.dropdownContainer}>
           <MultiSelect
-            style={styles.dropdown}
+            style={[
+              styles.dropdown,
+              dropdownRadiusVis
+                ? {
+                    borderTopLeftRadius: 5,
+                    borderTopRightRadius: 5,
+                    borderBottomLeftRadius: 50,
+                    borderBottomRightRadius: 50,
+                  }
+                : {
+                    borderTopLeftRadius: 5,
+                    borderTopRightRadius: 5,
+                    borderBottomLeftRadius: 0,
+                    borderBottomRightRadius: 0,
+                  },
+            ]}
             placeholderStyle={styles.placeholderStyle}
             selectedTextStyle={styles.selectedTextStyle}
             selectedStyle={styles.selectedStyle}
             containerStyle={{
+              top: -2,
               backgroundColor: '#323232',
               borderBottomRightRadius: 50,
               borderBottomLeftRadius: 50,
@@ -164,6 +146,8 @@ const Dice = ({navigation}) => {
             valueField="id"
             placeholder={I18n.t('selectCategory')}
             value={category}
+            onFocus={() => setDropdownRadiusVis(false)}
+            onBlur={() => setDropdownRadiusVis(true)}
             renderRightIcon={() => {
               <View />;
             }}
