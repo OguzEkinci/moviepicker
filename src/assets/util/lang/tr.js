@@ -14,7 +14,7 @@ const tr = {
   topRated: 'EN ÇOK OYLANANLAR',
   day: 'Günlük',
   week: 'Haftalık',
-  favError: 'Sadece 100 tane film kaydedebilirsiniz',
+  favError: 'Sadece 50 tane film kaydedebilirsiniz',
   noTitle: 'Başlık Yok',
   noRuntime: 'Süre bilgisi yok',
   noOverview: 'Ön inceleme yok',
