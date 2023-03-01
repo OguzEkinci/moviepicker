@@ -21,8 +21,9 @@ import {styles} from './Dice.style';
 import I18n from '../../assets/util/lang/_i18n';
 import {getMovieDetail} from '../../services/DiceServices/getMovieAllDetails';
 import {MultiSelect} from 'react-native-element-dropdown';
+import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
 
-const {width} = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
   const [loadingVisible, setLoadingVisible] = useState(false);
   const [errorModalVisible, setErrorModalVisible] = useState(false);
@@ -279,6 +280,12 @@ const Dice = ({navigation}) => {
           />
         </TouchableOpacity>
         {loadingVisible && <Loader />}
+        <View style={{marginTop: height * 0.09}}>
+          <BannerAd
+            size={BannerAdSize.BANNER}
+            unitId={'ca-app-pub-1678357774967097/7608759604'}
+          />
+        </View>
         <ErrorModal
           errorModalVisible={errorModalVisible}
           setErrorModalVisible={setErrorModalVisible}

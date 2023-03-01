@@ -12,7 +12,8 @@ import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import styles from './Fav.style';
 import I18n from '../../assets/util/lang/_i18n';
 import {FlatList} from 'react-native-gesture-handler';
-const {height} = Dimensions.get('screen');
+import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+const {width, height} = Dimensions.get('screen');
 
 const Fav = ({navigation}) => {
   const favList = useSelector(state => state.favList);
@@ -30,6 +31,12 @@ const Fav = ({navigation}) => {
         source={require('../../assets/background.jpg')}>
         <View style={styles.headerView}>
           <Text style={styles.headerText}>{I18n.t('saved')}</Text>
+          <View>
+            <BannerAd
+              size={'200x50'}
+              unitId={'ca-app-pub-1678357774967097/7029626369'}
+            />
+          </View>
           <Text
             style={[
               styles.headerText,
