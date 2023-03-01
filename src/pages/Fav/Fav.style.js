@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#f2f2f2',
   },
+  imageBackground: {
+    flex: 1,
+  },
   headerText: {
     fontWeight: 'bold',
     color: '#c7c7c7',
