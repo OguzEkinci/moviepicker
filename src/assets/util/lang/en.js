@@ -14,7 +14,7 @@ const en = {
   topRated: 'TOP RATED',
   day: 'Day',
   week: 'Week',
-  favError: 'You can save only 100 movie',
+  favError: 'You can save only 50 movie',
   noTitle: 'No Title',
   noRuntime: 'No Runtime Info',
   noOverview: 'No Overview',
