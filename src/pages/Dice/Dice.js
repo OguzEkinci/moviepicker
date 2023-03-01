@@ -171,7 +171,7 @@ const Dice = ({navigation}) => {
           }}
           rowTextStyle={{color: 'white'}}
           searchInputStyle={{backgroundColor: '#c7c7c7'}}
-          buttonTextStyle={{color: '#c7c7c7', fontWeight: 'bold'}}
+          buttonTextStyle={{color: '#c7c7c7', fontWeight: 'bold', fontSize: 16}}
           onSelect={(selectedItem, index) => {
             _setLanguage(selectedItem);
           }}
