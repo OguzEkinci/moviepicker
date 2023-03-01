@@ -82,10 +82,6 @@ const styles = StyleSheet.create({
     height: 55,
     marginTop: 10,
     backgroundColor: '#323232',
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    borderBottomLeftRadius: 50,
-    borderBottomRightRadius: 50,
   },
   placeholderStyle: {
     fontSize: 16,
