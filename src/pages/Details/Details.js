@@ -1,4 +1,4 @@
-import {isArray} from 'lodash';
+import {isArray, isEmpty} from 'lodash';
 import React, {useEffect, useReducer, useRef, useState} from 'react';
 import {View, Image, Dimensions, TouchableOpacity, Text} from 'react-native';
 import {getVideo} from '../../services/GetVideo/GetVideo';
@@ -11,9 +11,9 @@ import FavButton from '../../components/Button/FavButton';
 const {width, height} = Dimensions.get('screen');
 import I18n from '../../assets/util/lang/_i18n';
 import {FavErrorModal} from '../../components/FavErrorModal/FavErrorModal';
+import {languageWithInfo} from '../../data/language';
 const Details = props => {
   const {movieInfo, isDicePage} = props.route.params;
-  console.log(movieInfo, isDicePage);
   const [addingErrorModalVisible, setAddingErrorModalVisible] = useState(false);
   const [videoKey, setVideoKey] = useState('');
   const [state, setState] = useReducer(
@@ -247,27 +247,48 @@ const Details = props => {
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
-              {movieInfo.spoken_languages &&
-                movieInfo.spoken_languages.map((item, index) => {
-                  return (
-                    <View
-                      key={index}
-                      style={{
-                        flexDirection: 'row',
-                        marginLeft: 7,
-                        marginRight: 7,
-                      }}>
-                      <Image
-                        source={require('../../assets/language.png')}
-                        resizeMode="center"
-                        style={styles.icon}
-                      />
-                      <Text style={{color: '#ddd'}}>
-                        {I18n.t(`${item.english_name}`)}
-                      </Text>
-                    </View>
-                  );
-                })}
+              {!isEmpty(movieInfo.spoken_languages) ? (
+                movieInfo.spoken_languages.map((item, index) =>
+                  languageWithInfo?.map(lng => {
+                    if (lng?.iso_639_1 === item?.iso_639_1) {
+                      return (
+                        <View
+                          key={index}
+                          style={{
+                            flexDirection: 'row',
+                            marginTop: 7,
+                            marginLeft: 7,
+                            marginRight: 7,
+                          }}>
+                          <Image
+                            source={require('../../assets/language.png')}
+                            resizeMode="center"
+                            style={styles.icon}
+                          />
+                          <Text style={{color: '#ddd'}}>
+                            {lng?.english_name}
+                          </Text>
+                        </View>
+                      );
+                    }
+                  }),
+                )
+              ) : (
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    marginTop: 7,
+                    marginLeft: 7,
+                    marginRight: 7,
+                  }}>
+                  <Image
+                    source={require('../../assets/language.png')}
+                    resizeMode="center"
+                    style={styles.icon}
+                  />
+                  <Text style={{color: '#ddd'}}>{I18n.t('NoLanguage')}</Text>
+                </View>
+              )}
             </View>
           )}
         </View>
