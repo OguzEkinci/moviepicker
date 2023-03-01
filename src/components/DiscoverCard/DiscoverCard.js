@@ -8,7 +8,7 @@ const DiscoverCard = ({item, key, discover, navigation}) => {
     <View key={key} style={styles.container}>
       <TouchableWithoutFeedback
         onPress={() => {
-          navigation.navigate('Details', {movieInfo: item, isDicePage: false});
+          navigation.navigate('Details', {movieInfo: item, isDicePage: true});
         }}>
         <View style={styles.card}>
           <View
