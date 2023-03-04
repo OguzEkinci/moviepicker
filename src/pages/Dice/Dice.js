@@ -111,6 +111,12 @@ const Dice = ({navigation}) => {
           alignItems: 'center',
         }}
         source={require('../../assets/background.jpg')}>
+        <View>
+          <BannerAd
+            size={BannerAdSize.BANNER}
+            unitId={'ca-app-pub-1678357774967097/7608759604'}
+          />
+        </View>
         <View style={styles.dropdownContainer}>
           <MultiSelect
             style={[
@@ -280,12 +286,7 @@ const Dice = ({navigation}) => {
           />
         </TouchableOpacity>
         {loadingVisible && <Loader />}
-        <View style={{marginTop: height * 0.09}}>
-          <BannerAd
-            size={BannerAdSize.BANNER}
-            unitId={'ca-app-pub-1678357774967097/7608759604'}
-          />
-        </View>
+
         <ErrorModal
           errorModalVisible={errorModalVisible}
           setErrorModalVisible={setErrorModalVisible}
