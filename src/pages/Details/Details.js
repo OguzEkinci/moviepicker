@@ -12,7 +12,7 @@ const {width, height} = Dimensions.get('screen');
 import I18n from '../../assets/util/lang/_i18n';
 import {FavErrorModal} from '../../components/FavErrorModal/FavErrorModal';
 import {languageWithInfo} from '../../data/language';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAd, BannerAdSize} from '@react-native-admob/admob';
 const Details = props => {
   const {movieInfo, isDicePage} = props.route.params;
   const [addingErrorModalVisible, setAddingErrorModalVisible] = useState(false);

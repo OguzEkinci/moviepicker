@@ -12,7 +12,7 @@ import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import styles from './Fav.style';
 import I18n from '../../assets/util/lang/_i18n';
 import {FlatList} from 'react-native-gesture-handler';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAd, BannerAdSize} from '@react-native-admob/admob';
 const {width, height} = Dimensions.get('screen');
 
 const Fav = ({navigation}) => {
@@ -50,7 +50,10 @@ const Fav = ({navigation}) => {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <BannerAd size={BannerAdSize.BANNER} unitId={TestIds.BANNER} />
+          <BannerAd
+            size={BannerAdSize.BANNER}
+            unitId={'ca-app-pub-1678357774967097/7029626369'}
+          />
         </View>
         <FlatList
           data={favList}

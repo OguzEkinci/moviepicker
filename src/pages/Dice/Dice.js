@@ -21,7 +21,7 @@ import {styles} from './Dice.style';
 import I18n from '../../assets/util/lang/_i18n';
 import {getMovieDetail} from '../../services/DiceServices/getMovieAllDetails';
 import {MultiSelect} from 'react-native-element-dropdown';
-import {BannerAd, BannerAdSize, TestIds} from '@react-native-admob/admob';
+import {BannerAd, BannerAdSize} from '@react-native-admob/admob';
 
 const {width, height} = Dimensions.get('window');
 const Dice = ({navigation}) => {
