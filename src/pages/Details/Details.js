@@ -91,7 +91,7 @@ const Details = props => {
             alignItems: 'flex-end',
             width: width,
             height: 50,
-            top: height / 3.6,
+            top: height / 3.62,
           }}>
           {videoKey ? (
             <View
@@ -115,7 +115,7 @@ const Details = props => {
                 <Image
                   source={require('../../assets/play.png')}
                   resizeMode="center"
-                  style={{width: 40, height: 40, tintColor: '#00f9f9'}}
+                  style={{width: 40, height: 40, tintColor: '#2ec4b6'}}
                 />
               </TouchableOpacity>
             </View>

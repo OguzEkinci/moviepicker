@@ -16,8 +16,8 @@ import ToggleButton from './components/ToggleButton/ToggleButton';
 import {DiscoverCard} from '../../components/DiscoverCard/DiscoverCard';
 import I18n from '../../assets/util/lang/_i18n';
 import Carousel from '../../components/react-native-snap-carousel/src/index';
-import {BannerAd, TestIds} from '@react-native-admob/admob';
-const {height} = Dimensions.get('window');
+import {BannerAd, BannerAdSize} from '@react-native-admob/admob';
+const {width, height} = Dimensions.get('window');
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.26);
 const Discover = ({navigation}) => {
@@ -95,12 +95,6 @@ const Discover = ({navigation}) => {
                 timeRange={timeRange}
                 setTimeRange={setTimeRange}
               />
-              <View>
-                <BannerAd
-                  size={'150x50'}
-                  unitId={'ca-app-pub-1678357774967097/4643684916'}
-                />
-              </View>
             </View>
             <Carousel
               data={trendingList}
@@ -146,6 +140,17 @@ const Discover = ({navigation}) => {
               }}
             />
           </ScrollView>
+          <View
+            style={{
+              width: width,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <BannerAd
+              size={BannerAdSize.BANNER}
+              unitId={'ca-app-pub-1678357774967097/4643684916'}
+            />
+          </View>
           <View style={{height: height * 0.14}} />
         </ScrollView>
         {loadingVisible && <Loader />}

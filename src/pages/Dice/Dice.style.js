@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   selectedStyle: {
     borderRadius: 12,
-    backgroundColor: '#00f9f9',
+    backgroundColor: '#2ec4b6',
   },
 });
 export {styles};

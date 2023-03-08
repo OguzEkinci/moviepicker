@@ -1,10 +1,17 @@
 import React from 'react';
-import {View, TouchableWithoutFeedback, Image, Text} from 'react-native';
+import {
+  View,
+  TouchableWithoutFeedback,
+  Image,
+  Text,
+  Dimensions,
+} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {AirbnbRating, Rating} from 'react-native-ratings';
 
 import {styles} from './DiscoverCard.style';
 const DiscoverCard = ({item, key, discover, navigation}) => {
+  const {width} = Dimensions.get('screen');
   return (
     <View key={key} style={styles.container}>
       <TouchableWithoutFeedback
@@ -64,18 +71,6 @@ const DiscoverCard = ({item, key, discover, navigation}) => {
               <Text style={{color: '#ddd', fontSize: 12, marginTop: 2}}>
                 {item?.release_date}
               </Text>
-              <AirbnbRating
-                count={10}
-                reviews={['']}
-                defaultRating={item.vote_average}
-                showRating={false}
-                size={15}
-                ratingContainerStyle={{
-                  marginTop: 12,
-                }}
-                isDisabled={true}
-                selectedColor={'#a0587e'}
-              />
               <View
                 style={{
                   flex: 1,
@@ -97,6 +92,19 @@ const DiscoverCard = ({item, key, discover, navigation}) => {
                   {item?.vote_count}
                 </Text>
               </View>
+              <AirbnbRating
+                count={10}
+                reviews={['']}
+                defaultRating={item.vote_average}
+                showRating={false}
+                size={width * 0.035}
+                ratingContainerStyle={{
+                  top: -2,
+                  marginRight: 16,
+                }}
+                isDisabled={true}
+                selectedColor={'#a0587e'}
+              />
             </View>
           )}
         </View>

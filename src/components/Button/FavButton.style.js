@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   image: {
     width: 45,
     height: 45,
-    tintColor: '#00f9f9',
+    tintColor: '#2ec4b6',
   },
 });
 export {styles};

@@ -196,7 +196,6 @@ const Dice = ({navigation}) => {
         />
         <View
           style={{
-            marginTop: 20,
             width: width,
             flexDirection: 'row',
             height: 100,
@@ -265,7 +264,7 @@ const Dice = ({navigation}) => {
               width: 50,
               height: 50,
               tintColor:
-                Appearance.getColorScheme() === 'dark' ? '#00f9f9' : '#123536',
+                Appearance.getColorScheme() === 'dark' ? '#2ec4b6' : '#2ec4b6',
             }}
             resizeMode={'contain'}
           />
@@ -280,7 +279,7 @@ const Dice = ({navigation}) => {
           onPress={() => _getMovie()}>
           <LottieView
             style={{height: 150}}
-            source={require('../../animations/5884-video-movie.json')}
+            source={require('../../animations/101477-play-ww.json')}
             autoPlay
             loop
           />

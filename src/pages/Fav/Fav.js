@@ -31,12 +31,6 @@ const Fav = ({navigation}) => {
         source={require('../../assets/background.jpg')}>
         <View style={styles.headerView}>
           <Text style={styles.headerText}>{I18n.t('saved')}</Text>
-          <View>
-            <BannerAd
-              size={'200x50'}
-              unitId={'ca-app-pub-1678357774967097/7029626369'}
-            />
-          </View>
           <Text
             style={[
               styles.headerText,
@@ -50,9 +44,17 @@ const Fav = ({navigation}) => {
             {isArray(favList) ? favList.length : 0} /50
           </Text>
         </View>
+        <View
+          style={{
+            width: width,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <BannerAd size={BannerAdSize.BANNER} unitId={TestIds.BANNER} />
+        </View>
         <FlatList
           data={favList}
-          contentContainerStyle={{paddingBottom: height * 0.09}}
+          contentContainerStyle={{paddingBottom: height * 0.09, marginTop: 5}}
           keyExtractor={item => item.id}
           renderItem={renderCard}
           getItemLayout={(data, index) => ({

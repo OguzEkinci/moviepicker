@@ -55,7 +55,7 @@ const Root = () => {
                   justifyContent: 'center',
                   width: 20,
                   height: 20,
-                  shadowColor: focused ? '#00f9f9' : 'rgba(50,50,50,0.0)',
+                  shadowColor: focused ? '#2ec4b6' : 'rgba(50,50,50,0.0)',
                   shadowOffset: {
                     width: 0,
                     height: 12,
@@ -70,7 +70,7 @@ const Root = () => {
                     width: 30,
                     height: 30,
                     bottom: 2,
-                    tintColor: focused ? '#00f9f9' : '#c7c7c7',
+                    tintColor: focused ? '#2ec4b6' : '#c7c7c7',
                   }}
                   source={
                     focused
@@ -97,7 +97,7 @@ const Root = () => {
                   height: 50,
                   alignItems: 'center',
                   justifyContent: 'center',
-                  shadowColor: focused ? '#00f9f9' : 'rgba(50,50,50,0.0)',
+                  shadowColor: focused ? '#2ec4b6' : 'rgba(50,50,50,0.0)',
                   shadowOffset: {
                     width: 0,
                     height: 12,
@@ -112,7 +112,7 @@ const Root = () => {
                     width: 75,
                     height: 75,
                     bottom: 2,
-                    tintColor: focused ? '#00f9f9' : '#c7c7c7',
+                    tintColor: focused ? '#2ec4b6' : '#c7c7c7',
                   }}
                   source={
                     focused
@@ -142,7 +142,7 @@ const Root = () => {
                   backgroundColor: 'rgba(50,50,50,0)',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  shadowColor: focused ? '#00f9f9' : 'rgba(50,50,50,0.0)',
+                  shadowColor: focused ? '#2ec4b6' : 'rgba(50,50,50,0.0)',
                   shadowOffset: {
                     width: 0,
                     height: 12,
@@ -157,7 +157,7 @@ const Root = () => {
                     width: 40,
                     height: 40,
                     bottom: 2,
-                    tintColor: focused ? '#00f9f9' : '#c7c7c7',
+                    tintColor: focused ? '#2ec4b6' : '#c7c7c7',
                   }}
                   source={
                     focused
