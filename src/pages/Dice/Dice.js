@@ -146,7 +146,7 @@ const Dice = ({navigation}) => {
               borderWidth: 0,
             }}
             activeColor={'#123536'}
-            maxSelect={5}
+            maxSelect={3}
             itemTextStyle={{color: 'white'}}
             data={genresWithId}
             labelField="name"
