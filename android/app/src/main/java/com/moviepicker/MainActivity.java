@@ -1,4 +1,4 @@
-package com.moviepicker;
+package com.randommoviepicker;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

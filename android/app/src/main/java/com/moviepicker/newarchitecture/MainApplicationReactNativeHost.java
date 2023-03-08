@@ -1,4 +1,4 @@
-package com.moviepicker.newarchitecture;
+package com.randommoviepicker.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.EmptyReactNativeConfig;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.moviepicker.BuildConfig;
-import com.moviepicker.newarchitecture.components.MainComponentsRegistry;
-import com.moviepicker.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.randommoviepicker.BuildConfig;
+import com.randommoviepicker.newarchitecture.components.MainComponentsRegistry;
+import com.randommoviepicker.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
