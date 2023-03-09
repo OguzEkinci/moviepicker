@@ -91,7 +91,7 @@ const Details = props => {
             alignItems: 'flex-end',
             width: width,
             height: 50,
-            top: height / 3.62,
+            top: height / 3.61,
           }}>
           {videoKey ? (
             <View

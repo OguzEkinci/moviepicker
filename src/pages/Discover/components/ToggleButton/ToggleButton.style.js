@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   leftButton: {
+    width: 60,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 4,
@@ -23,6 +24,7 @@ const styles = StyleSheet.create({
     elevation: 24,
   },
   rightButton: {
+    width: 60,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 4,
