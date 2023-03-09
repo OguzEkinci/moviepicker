@@ -207,6 +207,7 @@ const Dice = ({navigation}) => {
               backgroundColor: '#c7c7c7',
               borderBottomRightRadius: 50,
               borderTopLeftRadius: 50,
+              width: 100,
             }}>
             <Text
               style={{
@@ -233,6 +234,7 @@ const Dice = ({navigation}) => {
               backgroundColor: '#c7c7c7',
               borderTopRightRadius: 50,
               borderBottomLeftRadius: 50,
+              width: 100,
             }}>
             <Text
               style={{
